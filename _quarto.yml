@@ -20,7 +20,7 @@ website:
             file: tidytuesday-exercise/tidytuesday-exercise.qmd
     right:
       - icon: github 
-        href: https://github.com/ClarkeMiller/mclarkemiller_MADA.git        
+        href: https://github.com/ClarkeMiller/mclarkemiller_MADA/portfolio        
 
 format:
   html:
