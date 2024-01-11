@@ -2,14 +2,15 @@
 title: "My website and data analysis portfolio"
 ---
 
-# Hello
+# Hello!
 
-### And hello again
+### ![](images/20190706_072622.jpg)
 
-Welcome to **my website** and _data analysis portfolio._ 
+### I hope you are having a pleasant day!
 
+Welcome to **my website** and *data analysis portfolio.*
 
-* Please use the `Menu Bar` above to look around.
-* Have fun!
+-   Please use the `Menu Bar` above to look around.
+-   Have fun!
 
-**Feel free to change this text any way you want 😁!**
+**Fair warning! Most of this content is still under construction!**

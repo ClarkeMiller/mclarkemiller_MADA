@@ -1,7 +1,13 @@
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
 ---
 title: "About me"
 ---
 
-Add some text and a figure describing myself.
+![](images/Headshot.webp){fig-align="center"}
 
-For details, see the exercise instructions. 
+# **Dr. M. Clarke Miller Ph.D., MBA, M.Ed.**
+
+Clarke is an Associate Professor of Biochemistry at the University of North Georgia. Clarke holds a Ph.D. in Biochemistry from the University of Kentucky, an MBA from Oglethorpe University, and a MEd in Instructional Design and Development from the University of Georgia. After earning his Ph.D., he spent nearly a decade as a researcher at the Brown Cancer Center before accepting a position in the Department of Chemistry and Biochemistry at the University of North Georgia in 2014. Clarke is currently a student at the University of Georgia and in the process of completing a M.S. in Epidemiology and Biostatistics.
