@@ -1,0 +1,8 @@
+load("/Users/andrewruiz/MADA_course/mclarkemiller_MADA/starter-analysis-exercise/data/processed-data/processeddata2.rds")
+load("/Users/andrewruiz/MADA_course/mclarkemiller_MADA/starter-analysis-exercise/data/processed-data/processeddata2.rda")
+load("/Users/andrewruiz/MADA_course/mclarkemiller_MADA/starter-analysis-exercise/data/processed-data/processeddata.rds")
+load("/Users/andrewruiz/MADA_course/mclarkemiller_MADA/starter-analysis-exercise/data/processed-data/processeddata2.rds")
+load("/Users/andrewruiz/MADA_course/mclarkemiller_MADA/starter-analysis-exercise/data/processed-data/processeddata.rds")
+load("/Users/andrewruiz/MADA_course/mclarkemiller_MADA/starter-analysis-exercise/data/processed-data/processeddata2.rds")
+load("/Users/andrewruiz/MADA_course/mclarkemiller_MADA/starter-analysis-exercise/data/processed-data/processeddata.rds")
+load("/Users/andrewruiz/MADA_course/mclarkemiller_MADA/starter-analysis-exercise/results/tables-files/summarytable.rds")
