@@ -56,9 +56,9 @@ We are saving the results to the `results/tables` folder. Structure the folders 
 
 # Data exploration through figures
 
-Histogram plots for the continuous outcomes.
+## Histogram plots for the continuous outcomes.
 
-Height first.
+#### Height first.
 
 ```{r}
 p1 <- mydata %>% ggplot(aes(x=Height)) + geom_histogram() 
@@ -67,7 +67,7 @@ figure_file = here("starter-analysis-exercise","results","figures","height-distr
 ggsave(filename = figure_file, plot=p1) 
 ```
 
-Now weights.
+#### Now weights.
 
 ```{r}
 p2 <- mydata %>% ggplot(aes(x=Weight)) + geom_histogram() 
@@ -76,7 +76,7 @@ figure_file = here("starter-analysis-exercise","results","figures","weight-distr
 ggsave(filename = figure_file, plot=p2) 
 ```
 
-Now height as function of weight.
+#### Now height as function of weight.
 
 ```{r}
 p3 <- mydata %>% ggplot(aes(x=Height, y=Weight)) + geom_point() + geom_smooth(method='lm')
@@ -93,6 +93,7 @@ plot(p4)
 figure_file = here("starter-analysis-exercise","results","figures","height-weight-stratified.png")
 ggsave(filename = figure_file, plot=p4) 
 ```
+
 ## Boxplot of weight by smoking status
 
 ```{r}
@@ -103,19 +104,23 @@ p5 <- mydata %>%
     theme(legend.position = "none")
 
 plot(p5)
+
+figure_file = here("starter-analysis-exercise","results","figures","Weight_by_smoke.png")
+ggsave(filename = figure_file, plot=p5)
 ```
 
 ## Scatterplot of Weight by Age of First Alcohol stratified by gender
+
 ```{r}
-# Scatter plot of AlkyAge vs Weight by Gender
-p7 <- mydata %>%
+# Scatter plot of AlkyAge vs Weight stratified by Gender
+p6 <- mydata %>%
     ggplot(aes(x=Weight, y=AlkyAge, color=Gender)) +
     geom_point()  # Adds scatter plot points
 
-plot(p7)
+plot(p6)
 
 figure_file = here("starter-analysis-exercise","results","figures","AlkyAge_by_Weight_stratified.png")
-ggsave(filename = figure_file, plot=p7)
+ggsave(filename = figure_file, plot=p6)
 ```
 
 # Notes
