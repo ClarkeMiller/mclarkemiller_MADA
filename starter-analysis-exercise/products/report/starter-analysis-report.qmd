@@ -1,8 +1,8 @@
 ---
 title: "Manuscript/Report Template for a Data Analysis Project"
-subtitle: ""
-author: Your Name
-date: today
+subtitle: "Xueyan Hu contributed to this exercise."
+author: M. Clarke Miller
+date: 20 January 2024
 format:
   html:
     toc: false
@@ -12,11 +12,6 @@ bibliography: ../dataanalysis-template-references.bib
 csl: ../apa.csl
 ---
 
-The structure below is one possible setup for a data analysis project (including the course project). For a manuscript, adjust as needed. 
-You don't need to have exactly these sections, but the content covering those sections should be addressed.
-
-This uses MS Word as output format. [See here](https://quarto.org/docs/output-formats/ms-word.html) for more information. You can switch to other formats, like html or pdf. See [the Quarto documentation](https://quarto.org/) for other formats.
-
 
 ```{r, echo=FALSE, message=FALSE}
 # load a few R packages
@@ -25,21 +20,26 @@ library(knitr)
 ```
 
 
-
 # Summary/Abstract
-_Write a summary of your project._
+This project was entirely fabricated.  No actual data was collected.  No persons were interviewed and so no PII exists.  
+
+The goal of this project is to examine the effects of smoking, drinking, and the age that persons began drinking on physical and health characteristics such as height and weight.  The detrimental effects of these habits have been observed to be especially profound for the inhabitants of the Innsmouth Community. Innsmouth Community College has experienced an increasing college-wide epidemic of health concerns among students putatively associated with excess smoking and drinking.  Therefore, the focus of this study in the Innsmouth Community and the students of Innsmouth Community College.  "Volunteers" were asked about their personal/health history regarding personal smoking and drinking habits.  The data was processed using R and R Studio.
+
+Federal Oversight:  As the town of Innsmouth and the surrounding areas are considered federal reservations in perpetuity per the conditions set forth by the Innsmouth Federal Reservation Act of 1927.  Final approvals from the Department of the Interior must be obtained before any finished project can be implemented or data/result shared or published.
 
 
 {{< pagebreak >}}
 
 
 # Introduction 
+Smoking and drinking habits in adolescents have been shown to affect physical, developmental, and health in succeeding years.  This study has been designed to examine the effects of smoking, drinking, and the age that persons began drinking on physical and health characteristics such as height and weight.  Innsmouth, a “bedroom community”/suburb in the greater Arkham Metropolitan Area (AMA) in Massachusetts, was selected for this research project by the Commonwealth of Massachusetts.  Innsmouth Community College serves the Innsmouth Community and surrounding areas.  Data from the Arkham Health and Human-ish Services uncovered a spike in certain health issues that may be related to excess smoking/drinking and/or underage drinking among students of the college.  The goal of this study is to ascertain if the health issues are related to these activities or if they may be attributable some other cause such as genetic disease. 
+
 
 ## General Background Information
-_Provide enough background on your topic that others can understand the why and how of your analysis_ 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla congue vestibulum lorem in maximus. Pellentesque fermentum, elit in venenatis congue, sem sapien bibendum tellus, nec bibendum diam dui sit amet enim. Quisque sed laoreet elit. Donec feugiat tellus nec malesuada aliquam. Nam eu mi sed magna efficitur tempor. Ut vitae sagittis massa. Nunc eget iaculis nisl. Aenean rutrum vestibulum aliquam.
 
 ## Description of data and data source
-_Describe what the data is, what it contains, where it is from, etc. Eventually this might be part of a methods section._
+Curabitur consequat auctor blandit. Mauris et imperdiet est. Morbi eget viverra nisl, sit amet ultricies sapien. Nulla sit amet tortor aliquam, blandit tellus vitae, aliquet massa. Fusce erat leo, commodo a diam ac, porttitor mollis purus. Sed tristique gravida elementum. Maecenas quis leo bibendum, rhoncus ex vel, cursus ipsum. Ut libero felis, euismod ultrices eros sit amet, consectetur suscipit lacus. Vivamus mauris metus, tempus nec vulputate sed, posuere placerat neque. Curabitur vehicula sagittis felis. Vestibulum maximus enim in orci vulputate rutrum.
 
 ## Questions/Hypotheses to be addressed
 _State the research questions you plan to answer with this analysis._
@@ -149,5 +149,5 @@ Note that this cited reference will show up at the end of the document, the refe
 
 # References
 
-
+Lovecraft, H. P. (1936). The Shadow Over Innsmouth. [Place of publication not identified]: Ktoczyta.pl.
 

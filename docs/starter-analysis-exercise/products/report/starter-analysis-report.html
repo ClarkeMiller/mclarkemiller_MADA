@@ -6,8 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Your Name">
-<meta name="dcterms.date" content="2024-01-10">
+<meta name="author" content="M. Clarke Miller">
+<meta name="dcterms.date" content="2024-01-20">
 
 <title>M. Clarke Miller Data Analysis Portfolio - Manuscript/Report Template for a Data Analysis Project</title>
 <style>
@@ -162,6 +162,7 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Manuscript/Report Template for a Data Analysis Project</h1>
+<p class="subtitle lead">Xueyan Hu contributed to this exercise.</p>
 </div>
 
 
@@ -171,14 +172,14 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Your Name </p>
+             <p>M. Clarke Miller </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 10, 2024</p>
+      <p class="date">January 20, 2024</p>
     </div>
   </div>
   
@@ -190,8 +191,6 @@ div.csl-indent {
 </header>
 
 
-<p>The structure below is one possible setup for a data analysis project (including the course project). For a manuscript, adjust as needed. You don’t need to have exactly these sections, but the content covering those sections should be addressed.</p>
-<p>This uses MS Word as output format. <a href="https://quarto.org/docs/output-formats/ms-word.html">See here</a> for more information. You can switch to other formats, like html or pdf. See <a href="https://quarto.org/">the Quarto documentation</a> for other formats.</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'here' was built under R version 4.3.2</code></pre>
@@ -202,18 +201,19 @@ div.csl-indent {
 </div>
 <section id="summaryabstract" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Summary/Abstract</h1>
-<p><em>Write a summary of your project.</em></p>
+<p>This project was entirely fabricated. No actual data was collected. No persons were interviewed and so no PII exists.</p>
+<p>The goal of this project is to examine the effects of smoking, drinking, and the age that persons began drinking on physical and health characteristics such as height and weight. The detrimental effects of these habits have been observed to be especially profound for the inhabitants of the Innsmouth Community. Innsmouth Community College has experienced an increasing college-wide epidemic of health concerns among students putatively associated with excess smoking and drinking. Therefore, the focus of this study in the Innsmouth Community and the students of Innsmouth Community College. “Volunteers” were asked about their personal/health history regarding personal smoking and drinking habits. The data was processed using R and R Studio.</p>
+<p>Federal Oversight: As the town of Innsmouth and the surrounding areas are considered federal reservations in perpetuity. Final approvals from the Department of the Interior must be obtained before any finished project can be implemented or data/result shared or published.</p>
 <div style="page-break-after: always;"></div>
 </section>
 <section id="introduction" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Introduction</h1>
 <section id="general-background-information" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="general-background-information"><span class="header-section-number">2.1</span> General Background Information</h2>
-<p><em>Provide enough background on your topic that others can understand the why and how of your analysis</em></p>
+<p>Smoking and drinking habits in adolescents have been shown to affect physical, developmental, and health in succeeding years. This study has been designed to examine the effects of smoking, drinking, and the age that persons began drinking on physical and health characteristics such as height and weight.</p>
 </section>
 <section id="description-of-data-and-data-source" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="description-of-data-and-data-source"><span class="header-section-number">2.2</span> Description of data and data source</h2>
-<p><em>Describe what the data is, what it contains, where it is from, etc. Eventually this might be part of a methods section.</em></p>
 </section>
 <section id="questionshypotheses-to-be-addressed" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="questionshypotheses-to-be-addressed"><span class="header-section-number">2.3</span> Questions/Hypotheses to be addressed</h2>
@@ -257,21 +257,26 @@ Table&nbsp;1: Data summary table.
 <div class="cell-output-display">
 <table class="do-not-create-environment cell table table-sm table-striped small">
 <colgroup>
+<col style="width: 3%">
 <col style="width: 5%">
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
 <col style="width: 7%">
 <col style="width: 5%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 6%">
-<col style="width: 5%">
 <col style="width: 5%">
 <col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -279,6 +284,11 @@ Table&nbsp;1: Data summary table.
 <th style="text-align: left;">skim_variable</th>
 <th style="text-align: right;">n_missing</th>
 <th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">character.min</th>
+<th style="text-align: right;">character.max</th>
+<th style="text-align: right;">character.empty</th>
+<th style="text-align: right;">character.n_unique</th>
+<th style="text-align: right;">character.whitespace</th>
 <th style="text-align: left;">factor.ordered</th>
 <th style="text-align: right;">factor.n_unique</th>
 <th style="text-align: left;">factor.top_counts</th>
@@ -294,10 +304,59 @@ Table&nbsp;1: Data summary table.
 </thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">Smoke</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">Alcohol</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">factor</td>
 <td style="text-align: left;">Gender</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
 <td style="text-align: left;">FALSE</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">M: 4, F: 3, O: 2</td>
@@ -315,11 +374,16 @@ Table&nbsp;1: Data summary table.
 <td style="text-align: left;">Height</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: right;">165.66667</td>
-<td style="text-align: right;">15.97655</td>
+<td style="text-align: right;">15.976545</td>
 <td style="text-align: right;">133</td>
 <td style="text-align: right;">156</td>
 <td style="text-align: right;">166</td>
@@ -332,17 +396,66 @@ Table&nbsp;1: Data summary table.
 <td style="text-align: left;">Weight</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: right;">70.11111</td>
-<td style="text-align: right;">21.24526</td>
+<td style="text-align: right;">21.245261</td>
 <td style="text-align: right;">45</td>
 <td style="text-align: right;">55</td>
 <td style="text-align: right;">70</td>
 <td style="text-align: right;">80</td>
 <td style="text-align: right;">110</td>
 <td style="text-align: left;">▇▂▃▂▂</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">AlkyAge</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">17.77778</td>
+<td style="text-align: right;">2.905933</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">▅▅▂▂▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">38.33333</td>
+<td style="text-align: right;">7.399324</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: left;">▂▁▇▇▅</td>
 </tr>
 </tbody>
 </table>
@@ -361,7 +474,7 @@ Table&nbsp;1: Data summary table.
 <div id="fig-result" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../../results/figures/height-weight-stratified.png" class="img-fluid figure-img">
+<img src="../../results/figures/height-weight-stratified.png" class="img-fluid figure-img" width="1050">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-result-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Height and weight stratified by gender.
@@ -453,13 +566,14 @@ Table&nbsp;2: Linear model fit table.
 </section>
 </section>
 <section id="references" class="level1" data-number="6">
-
+<h1 data-number="6"><span class="header-section-number">6</span> References</h1>
+<p>Lovecraft, H. P. (1936). The Shadow Over Innsmouth. [Place of publication not identified]: Ktoczyta.pl.</p>
 
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">6 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-leek2015" class="csl-entry" role="listitem">
 Leek, J. T., &amp; Peng, R. D. (2015). Statistics. <span>What</span> is the question? <em>Science (New York, N.Y.)</em>, <em>347</em>(6228), 1314–1315. <a href="https://doi.org/10.1126/science.aaa6146">https://doi.org/10.1126/science.aaa6146</a>
 </div>
