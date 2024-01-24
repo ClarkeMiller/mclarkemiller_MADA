@@ -19,6 +19,7 @@ library(knitr)
 ```
 
 # Summary/Abstract
+
 This project was entirely fabricated. No actual data was collected. No persons were interviewed and so no PII exists.
 
 The goal of this project is to examine the effects of smoking, drinking, and the age that persons began drinking on physical and health characteristics such as height and weight. The detrimental effects of these habits have been observed to be especially profound for the inhabitants of the Innsmouth Community. Innsmouth Community College has experienced an increasing college-wide epidemic of health concerns among students putatively associated with excess smoking and drinking. Therefore, the focus of this study in the Innsmouth Community and the students of Innsmouth Community College. "Volunteers" were asked about their personal/health history regarding personal smoking and drinking habits. The data was processed using R and R Studio.

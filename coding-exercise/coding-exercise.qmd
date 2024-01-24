@@ -2,4 +2,133 @@
 title: "R Coding Exercise"
 ---
 
-Placeholder file for the future R coding exercise.
+```{r}
+
+#load dslabs package
+library("dslabs")
+library(dplyr)
+library(ggplot2)
+library(plotly)
+
+```
+
+```{r}
+#look at help file for gapminder data
+help(gapminder)
+
+#get an overview of data structure
+str(gapminder)
+
+#get a summary of data
+summary(gapminder)
+
+#determine the type of object gapminder is
+class(gapminder)
+
+```
+```{r}
+
+#Trial stuff -- This isn't part of the assignment and it did not work well.  Ignore.
+
+gapminder %>%
+  filter(year == 2007) %>%
+  group_by(continent) %>%
+  summary(lifeExp = median(lifeExp))
+
+#Write code that assigns only the African countries to a new object/variable called africadata. 
+
+africadata <- gapminder %>% filter(continent == "Africa")
+africadata <- africadata %>% filter(continent == "Africa")
+
+#get an overview of data structure
+str(africadata)
+
+#get a summary of data
+summary(africadata)
+
+#Infant mortality, life expectancy, and population stuff
+morbmortality <- africadata %>% 
+  select(infant_mortality, life_expectancy)
+  summary(morbmortality)
+  str(morbmortality)
+  View(morbmortality)
+  
+#Everybody needs a thrill!
+poplife <- africadata %>%
+ select(population, life_expectancy)
+ summary(poplife)
+ str(poplife)
+ View(poplife)
+ 
+```
+ 
+```{r}
+#plots, and tigers, and bears... OH MY!
+
+library(ggplot2)
+
+plot_infantmortality_vs_lifeexpectancy <- ggplot(morbmortality, aes(x=infant_mortality, y=life_expectancy)) + geom_point() + theme_classic() + labs(title = "Life Expextancy vs. Infant Mortality", x="Infant Mortality", y="Life Expectancy")
+
+plot_infantmortality_vs_lifeexpectancy
+
+```
+
+```{r}
+ 
+library(ggplot2)
+
+plot_popsize_vs_lifeexpectancy <- ggplot(poplife, aes(x=population, y=life_expectancy)) + geom_point() + theme_classic() + labs(title = "Life Expextancy vs. Population", x="Population", y="Life Expectancy")
+
+plot_popsize_vs_lifeexpectancy
+
+```
+
+```{r}
+#Missing data stuff and more data processing
+
+africadata %>%
+  group_by(year) %>%
+  summarize(missing_data1 = sum(is.na(infant_mortality))) %>%
+  filter(missing_data1>0)
+
+
+Africadata2000 <- africadata %>%
+  filter(year == 2000)
+  View(Africadata2000)
+
+
+#MORE PLOTTING 
+
+library(ggplot2)
+
+plot_infantmortality_vs_lifeexpectancy <- ggplot(Africadata2000, aes(x=infant_mortality, y=life_expectancy)) + geom_point() + theme_classic() + labs(title = "Life Expextancy vs. Infant Mortality", x="Infant Mortality", y="Life Expectancy")
+
+plot_infantmortality_vs_lifeexpectancy
+
+
+ 
+library(ggplot2)
+
+plot_popsize_vs_lifeexpectancy <- ggplot(Africadata2000, aes(x=population, y=life_expectancy)) + geom_point() + theme_classic() + labs(title = "Life Expextancy vs. Population", x="Population", y="Life Expectancy")
+
+plot_popsize_vs_lifeexpectancy
+
+```
+
+
+```{r}
+
+
+#Fitting Linear Models (Wish me luck!)
+
+fit1 <- lm(life_expectancy ~ infant_mortality, data=Africadata2000)
+summary(fit1)
+
+fit2 <- lm(life_expectancy ~ population, data=Africadata2000)
+summary(fit2)
+
+# Based on the p values, model one (fit1) is statistically significant, while model 2 (fit2) is not.  I'm not calculating the dang t or F statistic. ;-P
+
+```
+
+
