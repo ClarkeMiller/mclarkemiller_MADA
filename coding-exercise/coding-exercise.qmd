@@ -131,4 +131,145 @@ summary(fit2)
 
 ```
 
+## The following section was contributed by Andrew Ruiz.
+
+### This section uses the 'murders' dataset from the 'dslabs' package.
+
+#### The dataset contains the number of murders involving guns from FBI reports by state and region for 2010. In addition, it also contains population estimates by state.
+
+#### Let's begin by loading the packages.
+
+```{r}
+#if you have not install the packages, make sure to do so.
+#install.packages("dslabs")
+#install.packages("dplyr")
+#install.packages("ggplot2")
+#install.packages("maps")
+#install.packages(mapproj)
+
+
+library(dslabs)
+library(dplyr)
+library(ggplot2)
+library(maps)
+library(mapproj)
+
+```
+
+#### Now let's take a closer look at the data.
+
+```{r}
+#examine the dslabs dataset 'murders'
+head(murders)
+str(murders)
+```
+
+#### Lets see which state belong to each region
+
+```{r}
+
+murders %>%
+  group_by(region) %>%
+  summarise(states = paste(state, collapse = ", "))
+ 
+
+```
+
+#### In order to make comparisons, we will calculate the incident rates by state and region per 100,000 population.
+
+```{r}
+#create new table that includes the incident rate (per 100.000) by state for gun murders in 2010
+gun_murders <- murders %>%
+  mutate(IR_state_var = (total / population) * 100000)
+
+#examine newly created table
+head(gun_murders)
+```
+
+```{r}
+#create object that includes state and incident rate
+incident_state_obj <- gun_murders %>%
+  select(state, IR_state_var)
+
+#examine new object
+head(incident_state_obj)
+```
+
+```{r}
+#create new table that groups by region
+regional_data <- murders %>%
+  group_by(region) %>%
+  summarise(
+    total_population = sum(population),
+    total_murders = sum(total)
+  )	
+#view the new table
+head(regional_data)
+
+#using regional_data, calculate IR by region
+region_IR <- regional_data %>%
+  mutate(region_IR_var = (total_murders / total_population) * 100000)	
+head(region_IR)
+```
+
+### Let's process the data to make a map of incidence rates by state.
+
+```{r}
+#create object that includes state and incident rate
+incident_region_obj <- region_IR %>%
+  select(region_IR_var, region)
+
+#define the spatial data
+states_map <- map_data("state")
+#View the format for the map data
+head(states_map)
+
+#convert the column 'state' from the incident_state_obj to lower case to match the state_map formatting
+#this part of the code was obtained through troubleshooting with ChatGPT
+incident_state_obj$state <- tolower(incident_state_obj$state)
+
+# Join the incident rate data with the spatial data to create a map
+merged_data <- merge(states_map, incident_state_obj, by.x = "region", by.y = "state", all.x = TRUE)
+head(merged_data)
+```
+
+#### The map below shows the incident rate by state. However, the color ramp is scaled to that distinctions between most of the states are easily seen. DC has the highest IR of 16.5 (per 100,000) followed by 7.7 in Louisiana. The IR for DC was not included in the color ramp.
+```{r}
+ggplot(data = merged_data) +
+  geom_polygon(aes(x = long, y = lat, group = group, fill = IR_state_var), 
+               color = "darkgray", size = 0.25) +
+  
+  #define the coordinate system
+  coord_map("albers", lat0 = 29.5, lat1 = 45.5) +
+  
+  #settings for map elements
+  scale_fill_gradient(low = "yellow", high = "red", name = "Incidence Rate",
+                      limits = c(0, 8), 
+                      breaks = c(0, 2, 4, 6, 8),
+                      labels = c("0", "2", "4", "6", "8")) +
+  labs(title = "Gun Murder Incidence Rates by State (2010):",
+       subtitle = "the IR for DC is 16.5/100k. For visualization purposes, DC was not included in the color ramp") +
+  theme_minimal()
+
+```
+### Now let's run a simple statistical model. 
+#### Let's perform an ANOVA to test if there are no differences in the mean incident rates of gun murders between regions.
+
+```{r}
+#lets look at the distribution and compare using a box plot
+ggplot(gun_murders, aes(x = region, y = IR_state_var, fill = region)) +
+  geom_boxplot() +
+  labs(title = "Incidence Rates of Gun Murders by Region",
+       x = "Region",
+       y = "Incidence Rate (per 100,000)") +
+  theme_minimal()
+```
+#### Now let's run the ANOVA.
+```{r}
+anova_result <- aov(IR_state_var ~ region, data = gun_murders)
+summary(anova_result)
+```
+#### These results suggest that when comparing the average incidence rates of gun murders across different regions, we found statistically significant differences 
+
+
 
