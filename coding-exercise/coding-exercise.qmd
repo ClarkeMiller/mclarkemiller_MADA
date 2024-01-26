@@ -45,14 +45,12 @@ morbmortality <- africadata %>%
   select(infant_mortality, life_expectancy)
   summary(morbmortality)
   str(morbmortality)
-  View(morbmortality)
   
 #Everybody needs a thrill!
 poplife <- africadata %>%
  select(population, life_expectancy)
  summary(poplife)
  str(poplife)
- View(poplife)
  
 ```
  
@@ -88,7 +86,7 @@ africadata %>%
 
 Africadata2000 <- africadata %>%
   filter(year == 2000)
-  View(Africadata2000)
+ 
 
 
 #MORE PLOTTING 
