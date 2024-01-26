@@ -6,9 +6,9 @@ title: "R Coding Exercise"
 
 #load dslabs package
 library("dslabs")
-library(dplyr)
-library(ggplot2)
-library(plotly)
+library("dplyr")
+library("ggplot2")
+library("plotly")
 
 ```
 
@@ -57,7 +57,7 @@ poplife <- africadata %>%
 ```{r}
 #plots, and tigers, and bears... OH MY!
 
-library(ggplot2)
+library("ggplot2")
 
 plot_infantmortality_vs_lifeexpectancy <- ggplot(morbmortality, aes(x=infant_mortality, y=life_expectancy)) + geom_point() + theme_classic() + labs(title = "Life Expextancy vs. Infant Mortality", x="Infant Mortality", y="Life Expectancy")
 
@@ -67,7 +67,7 @@ plot_infantmortality_vs_lifeexpectancy
 
 ```{r}
  
-library(ggplot2)
+library("ggplot2")
 
 plot_popsize_vs_lifeexpectancy <- ggplot(poplife, aes(x=population, y=life_expectancy)) + scale_x_log10() + geom_point() + theme_classic() + labs(title = "Life Expextancy vs. Population", x="Population", y="Life Expectancy")
 
@@ -91,7 +91,7 @@ Africadata2000 <- africadata %>%
 
 #MORE PLOTTING 
 
-library(ggplot2)
+library("ggplot2")
 
 plot_infantmortality_vs_lifeexpectancy <- ggplot(Africadata2000, aes(x=infant_mortality, y=life_expectancy)) + geom_point() + theme_classic() + labs(title = "Life Expextancy vs. Infant Mortality", x="Infant Mortality", y="Life Expectancy")
 
@@ -99,7 +99,7 @@ plot_infantmortality_vs_lifeexpectancy
 
 
  
-library(ggplot2)
+library("ggplot2")
 
 plot_popsize_vs_lifeexpectancy <- ggplot(Africadata2000, aes(x=population, y=life_expectancy))+ scale_x_log10() + geom_point() + theme_classic() + labs(title = "Life Expextancy vs. Population", x="Population", y="Life Expectancy")
 
@@ -137,15 +137,15 @@ summary(fit2)
 #install.packages("dplyr")
 #install.packages("ggplot2")
 #install.packages("maps")
-#install.packages(mapproj)
+#install.packages("mapproj")
 
 
-library(dslabs)
-library(dplyr)
-library(ggplot2)
-library(maps)
-library(mapproj)
-library(ggthemes)
+library("dslabs")
+library("dplyr")
+library("ggplot2")
+library("maps")
+library("mapproj")
+library("ggthemes")
 
 ```
 
@@ -256,6 +256,7 @@ ggplot(gun_murders, aes(x = region, y = IR_state_var, fill = region)) +
        x = "Region",
        y = "Incidence Rate (per 100,000)") +
   theme_minimal()
+
 ```
 #### Now let's run the ANOVA.
 ```{r}
