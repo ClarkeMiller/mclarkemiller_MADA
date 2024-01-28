@@ -1,3 +1,5 @@
+![](images/Green Frog Narrow.jpg)
+
 ---
 title: "R Coding Exercise"
 ---
@@ -26,6 +28,7 @@ summary(gapminder)
 class(gapminder)
 
 ```
+
 ```{r}
 
 #Write code that assigns only the African countries to a new object/variable called africadata. 
@@ -53,7 +56,7 @@ poplife <- africadata %>%
  str(poplife)
  
 ```
- 
+
 ```{r}
 #plots, and tigers, and bears... OH MY!
 
@@ -106,7 +109,6 @@ plot_popsize_vs_lifeexpectancy <- ggplot(Africadata2000, aes(x=population, y=lif
 plot_popsize_vs_lifeexpectancy
 
 ```
-
 
 ```{r}
 
@@ -227,6 +229,7 @@ head(merged_data)
 ```
 
 #### The map below shows the incident rate by state. However, the color ramp is scaled to that distinctions between most of the states are easily seen. DC has the highest IR of 16.5 (per 100,000) followed by 7.7 in Louisiana. The IR for DC was not included in the color ramp.
+
 ```{r}
 ggplot(data = merged_data) +
   geom_polygon(aes(x = long, y = lat, group = group, fill = IR_state_var), 
@@ -245,7 +248,9 @@ ggplot(data = merged_data) +
   theme_minimal()
 
 ```
-### Now let's run a simple statistical model. 
+
+### Now let's run a simple statistical model.
+
 #### Let's perform an ANOVA to test if there are no differences in the mean incident rates of gun murders between regions.
 
 ```{r}
@@ -258,12 +263,12 @@ ggplot(gun_murders, aes(x = region, y = IR_state_var, fill = region)) +
   theme_minimal()
 
 ```
+
 #### Now let's run the ANOVA.
+
 ```{r}
 anova_result <- aov(IR_state_var ~ region, data = gun_murders)
 summary(anova_result)
 ```
-#### These results suggest that when comparing the average incidence rates of gun murders across different regions, we found statistically significant differences 
 
-
-
+#### These results suggest that when comparing the average incidence rates of gun murders across different regions, we found statistically significant differences

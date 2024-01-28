@@ -1,13 +1,19 @@
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+![](images/Red%20Sunrise%20Narrow-01.jpg)
+
 ---
 title: "Manuscript/Report Template for a Data Analysis Project"
 subtitle: "Andrew Ruiz contributed to this exercise."
 author: M. Clarke Miller
 date: 20 January 2024
 format:
-  html:
-    toc: false
-    number-sections: true
-    highlight-style: github
+html:
+toc: false
+number-sections: true
+highlight-style: github
 bibliography: ../dataanalysis-template-references.bib
 csl: ../apa.csl
 ---
