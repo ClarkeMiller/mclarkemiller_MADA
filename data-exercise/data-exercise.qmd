@@ -1,0 +1,98 @@
+---
+
+---
+
+![](images/Pink Sky Narrow.jpg)
+
+---
+title: "Data Exercise"
+---
+
+```{r}
+#Call a bunch of libraries.
+library(ggplot2) 
+library(broom) 
+library(here) 
+library(readxl) 
+library(dplyr) 
+library(tidyr) 
+library(skimr) 
+
+#Load excel data file
+data_location <- here::here("data-exercise","CM_data.xlsx")
+CM_data <- readxl::read_excel(data_location)
+
+#Take a squinty
+dplyr::glimpse(CM_data)
+summary(CM_data)
+head(CM_data)
+skimr::skim(CM_data)
+
+#Save a rds version
+save_data_location <- here::here("data-exercise","CM_data.rds")
+saveRDS(CM_data, file = save_data_location)
+
+```
+
+```{r}
+#plots, and tigers, and bears... OH MY!
+
+library("ggplot2")
+
+plot_BMI_vs_SYSBP <- ggplot(CM_data, aes(x=BMI, y=SYSBP)) + geom_point() + theme_classic() + labs(title = "Systolic Blood Pressure vs. BMI", x="BMI", y="Systolic Blood Pressure")
+
+plot_BMI_vs_SYSBP
+
+plot_BMI_vs_TOTCHOL <- ggplot(CM_data, aes(x=BMI, y=TOTCHOL)) + geom_point() + theme_classic() + labs(title = "Total Cholesterol vs. BMI", x="BMI", y="Total Cholesterol")
+
+plot_BMI_vs_TOTCHOL
+
+plot_SYSBP_vs_TOTCHOL <- ggplot(CM_data, aes(x=TOTCHOL, y=SYSBP)) + geom_point() + theme_classic() + labs(title = "Systolic Blood Pressure vs. Total Cholesterol", x="Total Cholesterol", y="Systolic Blood Pressure")
+
+plot_SYSBP_vs_TOTCHOL
+
+```
+
+```{r}
+#Linear Regression of Data Sets
+
+#BMI_vs_SYSBP
+lmfit1 <- lm(BMI ~ SYSBP, CM_data)  
+
+#Place results from fit into a data frame with the tidy function
+lmtable1 <- broom::tidy(lmfit1)
+
+#Look at fit results
+print(lmtable1)
+
+#Save fit results table  
+table_file1 = here("data-exercise", "BMI_vs_SYSBP_table.rds")
+saveRDS(lmtable1, file = table_file1)
+
+#BMI_vs_TOTCHOL
+lmfit2 <- lm(BMI ~ TOTCHOL, CM_data)  
+
+#Place results from fit into a data frame with the tidy function
+lmtable2 <- broom::tidy(lmfit2)
+
+#Look at fit results
+print(lmtable2)
+
+#Save fit results table  
+table_file2 = here("data-exercise", "BMI_vs_TOTCHOL_table.rds")
+saveRDS(lmtable2, file = table_file2)
+
+#SYSBP_vs_TOTCHOL
+lmfit3 <- lm(TOTCHOL ~ SYSBP, CM_data)  
+
+#Place results from fit into a data frame with the tidy function
+lmtable3 <- broom::tidy(lmfit3)
+
+#Look at fit results
+print(lmtable3)
+
+#Save fit results table  
+table_file3 = here("data-exercise", "BMI_vs_SYSBP_table.rds")
+saveRDS(lmtable3, file = table_file3)
+
+```
