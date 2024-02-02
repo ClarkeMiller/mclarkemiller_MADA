@@ -1,5 +1,8 @@
-![](images/Green Frog Narrow.jpg)
+---
 
+---
+
+![](images/Red Sunrise Narrow.jpg)
 ---
 title: "R Coding Exercise"
 ---
