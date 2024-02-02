@@ -1,8 +1,8 @@
----
+------------------------------------------------------------------------
 
----
+------------------------------------------------------------------------
 
-![](images/Pink Sky Narrow.jpg)
+![](images/Pink%20Sky%20Narrow.jpg)
 
 ---
 title: "Data Exercise"
@@ -43,13 +43,25 @@ plot_BMI_vs_SYSBP <- ggplot(CM_data, aes(x=BMI, y=SYSBP)) + geom_point() + theme
 
 plot_BMI_vs_SYSBP
 
+plot_BMI_vs_SYSBP2 <- ggplot(CM_data, aes(x=BMI, y=SYSBP)) + geom_smooth(method = "loess") + theme_classic() + labs(title = "Systolic Blood Pressure vs. BMI", x="BMI", y="Systolic Blood Pressure")
+
+plot_BMI_vs_SYSBP2
+
 plot_BMI_vs_TOTCHOL <- ggplot(CM_data, aes(x=BMI, y=TOTCHOL)) + geom_point() + theme_classic() + labs(title = "Total Cholesterol vs. BMI", x="BMI", y="Total Cholesterol")
 
 plot_BMI_vs_TOTCHOL
 
+plot_BMI_vs_TOTCHOL2 <- ggplot(CM_data, aes(x=BMI, y=TOTCHOL)) + geom_smooth(method = "loess") + theme_classic() + labs(title = "Total Cholesterol vs. BMI", x="BMI", y="Total Cholesterol")
+
+plot_BMI_vs_TOTCHOL2
+
 plot_SYSBP_vs_TOTCHOL <- ggplot(CM_data, aes(x=TOTCHOL, y=SYSBP)) + geom_point() + theme_classic() + labs(title = "Systolic Blood Pressure vs. Total Cholesterol", x="Total Cholesterol", y="Systolic Blood Pressure")
 
 plot_SYSBP_vs_TOTCHOL
+
+plot_SYSBP_vs_TOTCHOL2 <- ggplot(CM_data, aes(x=TOTCHOL, y=SYSBP)) + geom_smooth(method = "loess") + theme_classic() + labs(title = "Systolic Blood Pressure vs. Total Cholesterol", x="Total Cholesterol", y="Systolic Blood Pressure")
+
+plot_SYSBP_vs_TOTCHOL2
 
 ```
 
