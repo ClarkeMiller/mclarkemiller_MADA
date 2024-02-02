@@ -28,6 +28,7 @@ summary(CM_data)
 head(CM_data)
 skimr::skim(CM_data)
 
+
 #Save a rds version
 save_data_location <- here::here("data-exercise","CM_data.rds")
 saveRDS(CM_data, file = save_data_location)
