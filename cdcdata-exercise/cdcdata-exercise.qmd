@@ -1,7 +1,9 @@
 ---
 title: "CDC Data Exercise"
-title: "COVID-19 Vaccinations in the United States"
+
 ---
+
+## Data from CDC: COVID-19 Vaccinations in the United States
 
 ```{r}
 #Call a bunch of libraries.
