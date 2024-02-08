@@ -1,0 +1,70 @@
+---
+title: "CDC Data Exercise"
+title: "COVID-19 Vaccinations in the United States"
+---
+
+```{r}
+#Call a bunch of libraries.
+library(ggplot2) 
+library(broom) 
+library(here) 
+library(readxl) 
+library(dplyr) 
+library(tidyr) 
+library(skimr) 
+
+#Load excel data file
+#Data file from CDC "COVID-19_Vaccinations_in_the_United_States_Jurisdiction_20240208"
+data_location <- here::here("cdcdata-exercise","CDC_COVID-19_Vaccinations.xlsx")
+CDC_data <- readxl::read_excel(data_location)
+
+#Take a squinty
+dplyr::glimpse(CDC_data)
+summary(CDC_data)
+head(CDC_data)
+skimr::skim(CDC_data)
+class(CDC_data $Location)
+
+#Save a rds version
+save_data_location <- here::here("cdcdata-exercise","CDC_data.rds")
+saveRDS(CDC_data, file = save_data_location)
+
+#Location, 
+CDC_Filter <- CDC_data %>% 
+  select(Location, Date, Dist_Per_100K, Admin_Per_100K, Distributed_Janssen, Distributed_Moderna, Distributed_Pfizer)
+
+#Take another squinty
+dplyr::glimpse(CDC_Filter)
+summary(CDC_Filter)
+head(CDC_Filter)
+skimr::skim(CDC_Filter)
+
+library("ggplot2")
+
+plot_date_vs_dist <- ggplot(CDC_Filter, aes(x=Date, y=Dist_Per_100K)) + geom_point() + theme_classic() + labs(title = "Doses Distributed vs. Time", x="Time (Date)", y="Doses Distibuted Per 100K")
+
+plot_date_vs_dist
+
+plot_date_vs_admin <- ggplot(CDC_Filter, aes(x=Date, y=Admin_Per_100K)) + geom_point() + theme_classic() + labs(title = "Doses Administered vs. Time", x="Time (Date)", y="Doses Administrated Per 100K")
+
+plot_date_vs_admin
+
+```
+
+```{r}
+#Filtered to Georgia
+CDC_SE_Filter <- CDC_Filter %>% filter(Location == "GA")
+CDC_SE_Filter <- CDC_SE_Filter %>% filter(Location == "GA")
+CDC_SE_Filter <- na.omit(CDC_SE_Filter)
+
+library("ggplot2")
+
+plot_date_vs_dist2 <- ggplot(CDC_SE_Filter, aes(x=Date, y=Dist_Per_100K)) + geom_point() + theme_classic() + labs(title = "Doses Distributed vs. Time", x="Time (Date)", y="Doses Distibuted Per 100K")
+
+plot_date_vs_dist2
+
+plot_date_vs_admin2 <- ggplot(CDC_SE_Filter, aes(x=Date, y=Admin_Per_100K)) + geom_point() + theme_classic() + labs(title = "Doses Administered vs. Time", x="Time (Date)", y="Doses Administrated Per 100K")
+
+plot_date_vs_admin2
+
+```
