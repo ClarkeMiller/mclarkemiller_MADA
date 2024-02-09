@@ -1,6 +1,5 @@
 ---
 title: "CDC Data Exercise"
-
 ---
 
 ## Data from CDC: COVID-19 Vaccinations in the United States
@@ -72,6 +71,7 @@ plot_date_vs_admin2 <- ggplot(CDC_SE_Filter, aes(x=Date, y=Admin_Per_100K)) + ge
 plot_date_vs_admin2
 
 ```
+
 ```{r}
 
 
