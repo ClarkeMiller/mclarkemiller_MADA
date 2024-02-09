@@ -7,13 +7,15 @@ title: "CDC Data Exercise"
 
 ```{r}
 #Call a bunch of libraries.
+library(tidyverse)
 library(ggplot2) 
 library(broom) 
 library(here) 
 library(readxl) 
 library(dplyr) 
 library(tidyr) 
-library(skimr) 
+library(skimr)
+library(kableExtra)
 
 #Load excel data file
 #Data file from CDC "COVID-19_Vaccinations_in_the_United_States_Jurisdiction_20240208"
@@ -68,5 +70,28 @@ plot_date_vs_dist2
 plot_date_vs_admin2 <- ggplot(CDC_SE_Filter, aes(x=Date, y=Admin_Per_100K)) + geom_point() + theme_classic() + labs(title = "Doses Administered vs. Time", x="Time (Date)", y="Doses Administrated Per 100K")
 
 plot_date_vs_admin2
+
+```
+```{r}
+
+
+CDC_SE_All <- CDC_Filter %>% filter(Location %in% c("FL", "GA", "VA", "TN", "NC", "SC", "AL", "KY", "MS"))
+CDC_SE_All <- CDC_SE_All %>% filter(Location %in% c("FL", "GA", "VA", "TN", "NC", "SC", "AL", "KY", "MS"))
+CDC_SE_All <- na.omit(CDC_SE_All)
+
+#Take another squinty
+dplyr::glimpse(CDC_SE_All)
+summary(CDC_SE_All)
+head(CDC_SE_All)
+skimr::skim(CDC_SE_All)
+
+
+
+CDC_plot3 <- ggplot(CDC_SE_All, aes(x = `Location`, y = Admin_Per_100K)) + geom_bar(stat = "identity", position = "dodge", color = "blue") +
+labs(title = "Administration of COVID Vaccine by State 5/10/2023", x = "State", y = "Admin Per 100K Pop") +  
+guides(x =  guide_axis(angle = 90)) +
+theme_minimal() 
+
+CDC_plot3
 
 ```
