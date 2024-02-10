@@ -1,20 +1,23 @@
 ---
 title: "CDC Data Exercise"
+author: "Clarke Miller"
 ---
 
 ## Data from CDC: COVID-19 Vaccinations in the United States
 
+Data can be found at: https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc/about_data
+
 ```{r}
 #Call a bunch of libraries.
-library(tidyverse)
-library(ggplot2) 
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(ggplot2))
 library(broom) 
-library(here) 
+suppressPackageStartupMessages(library(here))
 library(readxl) 
 library(dplyr) 
 library(tidyr) 
 library(skimr)
-library(kableExtra)
+suppressPackageStartupMessages(library(kableExtra))
 
 #Load excel data file
 #Data file from CDC "COVID-19_Vaccinations_in_the_United_States_Jurisdiction_20240208"
@@ -87,8 +90,8 @@ skimr::skim(CDC_SE_All)
 
 
 
-CDC_plot3 <- ggplot(CDC_SE_All, aes(x = `Location`, y = Admin_Per_100K)) + geom_bar(stat = "identity", position = "dodge", color = "blue") +
-labs(title = "Administration of COVID Vaccine by State 5/10/2023", x = "State", y = "Admin Per 100K Pop") +  
+CDC_plot3 <- ggplot(CDC_SE_All, aes(x = `Location`, y = Admin_Per_100K)) + geom_bar(stat = "identity", position = "dodge", color = "orange") +
+labs(title = "Administration of COVID Vaccine by State", x = "State", y = "Admin Per 100K Pop") +  
 guides(x =  guide_axis(angle = 90)) +
 theme_minimal() 
 
