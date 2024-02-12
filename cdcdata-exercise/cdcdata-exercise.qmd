@@ -98,3 +98,81 @@ theme_minimal()
 CDC_plot3
 
 ```
+
+Contribution made by Arlyn Santiago
+
+*All the code below was generated using AI tools such as ChatGPT and Bard AI...*
+```{r}
+# Summary statistics for numerical variables using the CDC_SE_Filter dataset
+num_summary <- lapply(CDC_SE_Filter, function(x) {
+  if(is.numeric(x)) {
+    min_val <- min(x, na.rm = TRUE)
+    max_val <- max(x, na.rm = TRUE)
+    c("Min" = min_val, "Max" = max_val)
+  }
+})
+
+# Frequency table for categorical variables
+cat_frequency <- lapply(CDC_SE_Filter, function(x) {
+  if(is.factor(x) | is.character(x)) {
+    table(x) / length(x)
+  }
+})
+#nrows <- nrow(data) # Number of rows to generate
+# Update the synthetic data generation function to accommodate both numerical summaries and categorical frequencies
+generate_synthetic_data <- function(num_summary, cat_frequency, nrows) {
+  synthetic_data <- data.frame(matrix(ncol = length(num_summary) + length(cat_frequency), nrow = nrows))
+  
+  # Add numerical data
+  for (var_name in names(num_summary)) {
+    if (!is.null(num_summary[[var_name]])) {
+      synthetic_data[[var_name]] <- runif(nrows, min = num_summary[[var_name]]["Min"], max = num_summary[[var_name]]["Max"])
+    }
+  }
+  
+  # Add categorical data
+  for (var_name in names(cat_frequency)) {
+    if (!is.null(cat_frequency[[var_name]])) {
+      categories <- names(cat_frequency[[var_name]])
+      frequencies <- as.numeric(cat_frequency[[var_name]])
+      synthetic_data[[var_name]] <- sample(categories, nrows, replace = TRUE, prob = frequencies)
+    }
+  }
+  
+  return(synthetic_data)
+}
+
+# Specify the number of rows for the synthetic dataset
+#nrows <- nrow(original_data)
+
+generate_synthetic_data <- function(num_summary, cat_frequency, nrows) {
+  set.seed(123) # for reproducibility
+  
+  # Initialize an empty list to store synthetic data columns
+  synthetic_data_list <- list()
+  
+  # Generate synthetic numerical variables
+  for(var_name in names(num_summary)) {
+    if (!is.null(num_summary[[var_name]])) {
+      min_val <- num_summary[[var_name]]["Min"]
+      max_val <- num_summary[[var_name]]["Max"]
+      synthetic_data_list[[var_name]] <- runif(nrows, min = min_val, max = max_val)
+    }
+  }
+  
+  # Generate synthetic categorical variables
+  for(var_name in names(cat_frequency)) {
+    if (!is.null(cat_frequency[[var_name]])) {
+      categories <- names(cat_frequency[[var_name]])
+      frequencies <- as.numeric(cat_frequency[[var_name]])
+      synthetic_data_list[[var_name]] <- sample(categories, nrows, replace = TRUE, prob = frequencies)
+    }
+  }
+  
+  # Convert the list to a data frame
+  synthetic_data <- as.data.frame(synthetic_data_list)
+  
+  return(synthetic_data)
+}
+
+```
