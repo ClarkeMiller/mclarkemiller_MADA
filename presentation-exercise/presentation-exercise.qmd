@@ -1,5 +1,173 @@
 ---
 title: "Presentation Exercise"
+author: "Clarke Miller"
 ---
 
-Placeholder file for the future data/results presentation exercise.
+## Part 1: finding a graph and grabbing the data.
+
+In this section I looked for data on the current state of the flu in the US. I found a nice figure at the CDC Weekly U.S. Influenza Surveillance Report. (https://www.cdc.gov/flu/weekly/index.htm) The graph was titled "Influenza Positive Tests Reported to CDC by U.S. Public Health Laboratories, National Summary, 2023-2024 Season" (See figure 1 below.)
+
+## Figure 1: Influenza Positive Tests
+
+Reported to CDC by U.S. Public Health Laboratories National Summary, 2023-2024 Season
+
+![](Screenshot%202024-02-14%20at%2014-13-56%20Weekly%20U.S.%20Influenza%20Surveillance%20Report.jpg)
+
+Now I will try to recreate this figure. My efforts on this project were aided by input from the ChatGPT AI.
+
+## Grab the data: Copy data to a Excel and load from there.
+
+Easy-peasy-lemon-squeezy! Full disclosure, I tried to load the data directly from the CDC website (as was suggested by ChatGPT) and it did not work well. I got a bunch of unusable gibberish. For now I'm going to stick to the the space or tab delineated data files!
+
+```{r}
+#Call a bunch of libraries.
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(broom)) 
+suppressPackageStartupMessages(library(here))
+suppressPackageStartupMessages(library(readxl)) 
+suppressPackageStartupMessages(library(dplyr)) 
+suppressPackageStartupMessages(library(tidyr)) 
+suppressPackageStartupMessages(library(skimr))
+
+#Load excel data file
+#Data file from CDC "COVID-19_Vaccinations_in_the_United_States_Jurisdiction_20240208"
+data_location <- here::here("presentation-exercise","Flu Chart Data.xlsx")
+CDC_data_flu <- readxl::read_excel(data_location)
+
+
+#Save a rds version
+save_data_location <- here::here("presentation-exercise","CDC_Flu_Chart_Data.rds")
+saveRDS(CDC_data_flu, file = save_data_location)
+
+#Take a squinty
+dplyr::glimpse(CDC_data_flu)
+summary(CDC_data_flu)
+head(CDC_data_flu)
+skimr::skim(CDC_data_flu)
+class(CDC_data_flu $Location)
+
+```
+
+## Graph it all!
+
+The "seed" for this code was provided by ChatGPT. It took quite a bit of correction to get it to work properly. One big hurdle was that the data for the week provided by the CDC created a large gap in the graph. Instead of date data it was recorded as a specific week. i.e. 202340. (See Figure 2 below.) Another thing that I noticed right off the bat, not all of the categories are showing up. Some categories, such as A(H3N2v) and B(YAM), have no values so we wouldn't expect them to show up. That being said, at least 5 different categories should show up in the rendering.
+
+```{r}
+suppressPackageStartupMessages(library(ggplot2))
+
+# Plot the data using a layered bar graph
+ggplot(CDC_data_flu, aes(x = Week)) +
+  geom_bar(aes(y = A_Subtyping_not_performed, fill = "A Subtyping not performed"), stat = "identity", color="black", position = "stack") + 
+  geom_bar(aes(y = A_Unable_to_Subtype, fill = "A Unable to Subtype"), stat = "identity", color="black", position = "stack") + 
+  geom_bar(aes(y = A_H1N1_pdm09, fill = "A (H1N1)pdm09"), stat = "identity", color="black", position = "stack") + 
+  geom_bar(aes(y = A_H3N2, fill = "A (H3N2)"), stat = "identity", color="black", position = "stack") + 
+  geom_bar(aes(y = A_H3N2v, fill = "A H3N2v"), stat = "identity", color="black", position = "stack") + 
+  geom_bar(aes(y = B, fill = "B (Linage Not Perfromed)"), stat = "identity", color="black", position = "stack") + 
+  geom_bar(aes(y = BVIC, fill = "B Victoria Lineage"), stat = "identity", color="black", position = "stack") + 
+  geom_bar(aes(y = BYAM, fill = "B Yamagata Lineage"), stat = "identity", color="black", position = "stack") + 
+  labs(title = "Influenza Positive Tests Reported to CDC",
+       subtitle = "U.S. Public Health Laboratories, National Summary, 2023-2024 Season",
+       x = "Week",
+       y = "Number of Positive Specimens",
+       fill = "Influenza Type") + 
+  theme_minimal()
+
+```
+
+```{r}
+
+```
+
+## Figure 2: Data used to create Figure1.
+
+![](Screenshot%202024-02-14%20at%2019-46-17%20INFLUENZA%20Isolates%20Data%20TableWeek%2005%20Season%202023-2024.jpg)
+
+## Making a publication quality figure.
+
+Wow. So I am still very new to programming anything with R. I don't think that I'm going to be reaching for an interactive figure/table. (Sorry, folks!) However, let's see if we can't make a decent looking table.
+
+```{r}
+#Let's filter the data to get rid of the columns with all zero and take a quick look!
+CDC_data_flu <- CDC_data_flu %>% 
+  select(Week, A_H1N1_pdm09, A_H3N2, A_Subtyping_not_performed, B, BVIC, `Total _Tested`)
+
+library(gt)
+CDC_data_flu |> 
+  gt() 
+
+```
+
+Yikes! The commands worked, but this table looks hideous! Let's give a few of the variables better names. A_Subtyping_not_performed is a bit long and ridiculous.
+
+```{r}
+
+CDC_data_flu |> 
+  gt() |> 
+  cols_label(
+    Week = 'Week',
+    A_H1N1_pdm09 = 'A (H1N1) pdm09',
+    A_H3N2 = 'A H3N2',
+    A_Subtyping_not_performed = 'A Subtype Unperf',
+    B = 'B',
+    BVIC = 'B Victoria',
+    `Total _Tested`= 'Total Tested'
+  )
+
+
+```
+
+
+Okay, that looks a bit spiffier.  Let's add a few column spanners just for fun.
+
+
+```{r}
+
+CDC_data_flu |> 
+  gt() |> 
+  cols_label(
+    Week = 'Week',
+    A_H1N1_pdm09 = 'A (H1N1) pdm09',
+    A_H3N2 = 'A H3N2',
+    A_Subtyping_not_performed = 'A Subtype Unperf',
+    B = 'B',
+    BVIC = 'B Victoria',
+    `Total _Tested`= 'Total Tested'
+  ) |> 
+  tab_spanner(
+    label = md('**A Strains**'),
+    columns = c('A_H1N1_pdm09', 'A_H3N2', 'A_Subtyping_not_performed')
+  ) |> 
+  tab_spanner(
+    label = md('**B Strains**'),
+    columns = c('B', 'BVIC')
+  ) 
+
+
+
+```
+
+
+## Now how about a better graph?
+Here's a question, will all of this generate a better graph?
+
+```{r}
+# Plot the data using a layered bar graph
+ggplot(CDC_data_flu, aes(x = Week)) +
+  geom_bar(aes(y = A_H1N1_pdm09, fill = "A (H1N1)pdm09"), stat = "identity", color="black", position = "stack") + 
+  geom_bar(aes(y = A_H3N2, fill = "A (H3N2)"), stat = "identity", color="black", position = "stack") +
+  geom_bar(aes(y = A_Subtyping_not_performed, fill = "A Subtyping not performed"), stat = "identity", color="black", position = "stack") +
+  geom_bar(aes(y = B, fill = "B (Linage Not Perfromed)"), stat = "identity", color="black", position = "stack") + 
+  geom_bar(aes(y = BVIC, fill = "B Victoria Lineage"), stat = "identity", color="black", position = "stack") + 
+  labs(title = "Influenza Positive Tests Reported to CDC",
+       subtitle = "U.S. Public Health Laboratories, National Summary, 2023-2024 Season",
+       x = "Week",
+       y = "Number of Positive Specimens",
+       fill = "Influenza Type") + 
+  theme_minimal()
+
+
+```
+Why, yes it does.  I can now see all five of the colors represented by the surviving data types.  Cleaning up the data a bit and presenting it in a coherent format does help the process of figure creation.  
+
+I am noting that my graph still does not look like the graph presented at the CDC site.  The maximum values of data columns only reaches approximately 1,200.  The CDC figure maximums approach 2,200.  I am not convinced that this data is the data used to generate the figure presented on the CDC website.

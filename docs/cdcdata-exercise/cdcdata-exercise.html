@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.542">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -377,7 +377,7 @@ $ Bivalent_Booster_65Plus_Pop_Pct        &lt;dbl&gt; 48.4, 24.9, 31.4, 35.1, 55.
  Distributed_Per_100k_18Plus Distributed_Per_100k_65Plus  Administered      
  Min.   :     0              Min.   :      0             Min.   :        0  
  1st Qu.: 91006              1st Qu.: 419992             1st Qu.:   738371  
- Median :175118              Median : 810811             Median :  2961704  
+ Median :175119              Median : 810811             Median :  2961704  
  Mean   :169238              Mean   : 844861             Mean   : 12007310  
  3rd Qu.:253733              3rd Qu.:1180005             3rd Qu.:  7860668  
  Max.   :507651              Max.   :6081460             Max.   :676728782  
@@ -409,7 +409,7 @@ $ Bivalent_Booster_65Plus_Pop_Pct        &lt;dbl&gt; 48.4, 24.9, 31.4, 35.1, 55.
  Admin_Per_100K   Admin_Per_100k_5Plus Admin_Per_100k_12Plus
  Min.   :     0   Min.   :     0       Min.   :     0       
  1st Qu.: 57268   1st Qu.:     0       1st Qu.:     0       
- Median :112584   Median :     0       Median :131274       
+ Median :112584   Median :     0       Median :131275       
  Mean   :106029   Mean   : 75010       Mean   :111677       
  3rd Qu.:153463   3rd Qu.:163334       3rd Qu.:176060       
  Max.   :302852   Max.   :319058       Max.   :331848       
@@ -417,7 +417,7 @@ $ Bivalent_Booster_65Plus_Pop_Pct        &lt;dbl&gt; 48.4, 24.9, 31.4, 35.1, 55.
  Admin_Per_100k_18Plus Admin_Per_100k_65Plus Recip_Administered 
  Min.   :     0        Min.   :     0        Min.   :        0  
  1st Qu.: 66305        1st Qu.:101955        1st Qu.:   576450  
- Median :135856        Median :175924        Median :  2870142  
+ Median :135857        Median :175924        Median :  2870142  
  Mean   :124209        Mean   :164847        Mean   : 11897640  
  3rd Qu.:181585        3rd Qu.:244964        3rd Qu.:  7711791  
  Max.   :333985        Max.   :460173        Max.   :676728782  
@@ -3101,7 +3101,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {

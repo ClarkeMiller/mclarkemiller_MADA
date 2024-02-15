@@ -102,6 +102,7 @@ CDC_plot3
 Contribution made by Arlyn Santiago
 
 *All the code below was generated using AI tools such as ChatGPT and Bard AI...*
+
 ```{r}
 # Summary statistics for numerical variables using the CDC_SE_Filter dataset
 num_summary <- lapply(CDC_SE_Filter, function(x) {
