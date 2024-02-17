@@ -117,9 +117,7 @@ CDC_data_flu |>
 
 ```
 
-
-Okay, that looks a bit spiffier.  Let's add a few column spanners just for fun.
-
+Okay, that looks a bit spiffier. Let's add a few column spanners just for fun.
 
 ```{r}
 
@@ -147,8 +145,8 @@ CDC_data_flu |>
 
 ```
 
-
 ## Now how about a better graph?
+
 Here's a question, will all of this generate a better graph?
 
 ```{r}
@@ -164,10 +162,74 @@ ggplot(CDC_data_flu, aes(x = Week)) +
        x = "Week",
        y = "Number of Positive Specimens",
        fill = "Influenza Type") + 
-  theme_minimal()
-
+  theme_minimal() + scale_x_datetime()
+  
 
 ```
-Why, yes it does.  I can now see all five of the colors represented by the surviving data types.  Cleaning up the data a bit and presenting it in a coherent format does help the process of figure creation.  
 
-I am noting that my graph still does not look like the graph presented at the CDC site.  The maximum values of data columns only reaches approximately 1,200.  The CDC figure maximums approach 2,200.  I am not convinced that this data is the data used to generate the figure presented on the CDC website.
+Why, yes it does. I can now see all five of the colors represented by the surviving data types. Cleaning up the data a bit and presenting it in a coherent format does help the process of figure creation.
+
+I am noting that my graph still does not look like the graph presented at the CDC site. The maximum values of data columns only reaches approximately 1,200. The CDC figure maximums approach 2,200. I am not convinced that this data is the data used to generate the figure presented on the CDC website.
+
+##One more time with feeling! So now I am going to try all of that with the original year/week format for the data. Wish me "Qapla!"
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(ggbreak))
+
+#Load excel data file
+#Data file from CDC "COVID-19_Vaccinations_in_the_United_States_Jurisdiction_20240208"
+data_location <- here::here("presentation-exercise","Flu Chart Data2.xlsx")
+CDC_data_flu2 <- readxl::read_excel(data_location)
+
+
+#Save a rds version
+save_data_location <- here::here("presentation-exercise","CDC_Flu_Chart_Data2.rds")
+saveRDS(CDC_data_flu2, file = save_data_location)
+
+#Let's filter the data to get rid of the columns with all zero and take a quick look!
+CDC_data_flu2 <- CDC_data_flu2 %>% 
+  select(Week, A_H1N1_pdm09, A_H3N2, A_Subtyping_not_performed, B, BVIC, `Total _Tested`)
+
+CDC_data_flu2 |> 
+  gt() |> 
+  cols_label(
+    Week = 'Week',
+    A_H1N1_pdm09 = 'A (H1N1) pdm09',
+    A_H3N2 = 'A H3N2',
+    A_Subtyping_not_performed = 'A Subtype Unperf',
+    B = 'B',
+    BVIC = 'B Victoria',
+    `Total _Tested`= 'Total Tested'
+  ) |> 
+  tab_spanner(
+    label = md('**A Strains**'),
+    columns = c('A_H1N1_pdm09', 'A_H3N2', 'A_Subtyping_not_performed')
+  ) |> 
+  tab_spanner(
+    label = md('**B Strains**'),
+    columns = c('B', 'BVIC')
+  ) 
+
+
+# Plot the data using a layered bar graph
+ggplot(CDC_data_flu2, aes(x = Week)) +
+  geom_bar(aes(y = A_H1N1_pdm09, fill = "A (H1N1)pdm09"), stat = "identity", color="black", position = "stack") + 
+  geom_bar(aes(y = A_H3N2, fill = "A (H3N2)"), stat = "identity", color="black", position = "stack") +
+  geom_bar(aes(y = A_Subtyping_not_performed, fill = "A Subtyping not performed"), stat = "identity", color="black", position = "stack") +
+  geom_bar(aes(y = B, fill = "B (Linage Not Perfromed)"), stat = "identity", color="black", position = "stack") + 
+  geom_bar(aes(y = BVIC, fill = "B Victoria Lineage"), stat = "identity", color="black", position = "stack") + 
+  labs(title = "Influenza Positive Tests Reported to CDC",
+       subtitle = "U.S. Public Health Laboratories, National Summary, 2023-2024 Season",
+       x = "Week",
+       y = "Number of Positive Specimens",
+       fill = "Influenza Type") + 
+  theme_minimal() + theme(axis.text.x = element_text(face="bold", color="black", 
+                           size=8, angle=90),
+          axis.text.y = element_text(face="bold", color="black", 
+                           size=8)) + theme( axis.line = element_line(colour = "black", linewidth = 0.75, linetype = "solid")) + scale_x_break(c(202352, 202401)) 
+  
+
+```
+
