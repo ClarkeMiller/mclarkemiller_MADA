@@ -1,0 +1,229 @@
+
+
+![](Ripe%20Pineapple%20Narrow.jpg)
+
+---
+title: "Fitting Exercise"
+---
+
+```{r}
+#Call a bunch of libraries.
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(tidymodels))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(broom)) 
+suppressPackageStartupMessages(library(here))
+suppressPackageStartupMessages(library(readxl)) 
+suppressPackageStartupMessages(library(dplyr)) 
+suppressPackageStartupMessages(library(tidyr)) 
+suppressPackageStartupMessages(library(skimr))
+suppressPackageStartupMessages(library(gt))
+suppressPackageStartupMessages(library(dslabs))
+suppressPackageStartupMessages(library(plotly))
+suppressPackageStartupMessages(library(gapminder))
+
+#Load excel data file
+data_location <- here::here("fitting-exercise","Mavoglurant_A2121_nmpk.csv")
+Mav_data <- read.csv(data_location)
+
+#Take a squinty
+dplyr::glimpse(Mav_data)
+summary(Mav_data)
+head(Mav_data)
+skimr::skim(Mav_data)
+
+
+#Save a rds version
+save_data_location <- here::here("fitting-exercise","mav_data.rds")
+saveRDS(Mav_data, file = save_data_location)
+
+```
+
+```{r}
+#plots
+
+library("ggplot2")
+
+plot_DV_vs_time <- ggplot(Mav_data, aes(x=TIME, y=DV)) + geom_point() + theme_classic() + labs(title = "DV vs. Time", x="DV", y="Time")
+
+plot_DV_vs_time
+
+```
+
+```{r}
+#Filter a bit.  Keeping only OCC=1.
+
+OCC_Mav1 <- Mav_data %>% filter(OCC == 1)
+OCC_Mav1 <- OCC_Mav1 %>% filter(OCC == 1)
+OCC_Mav1 <- na.omit(OCC_Mav1)
+
+#Take a squinty
+dplyr::glimpse(OCC_Mav1)
+summary(OCC_Mav1)
+head(OCC_Mav1)
+skimr::skim(OCC_Mav1)
+
+library("ggplot2")
+
+plot_DV_vs_time1 <- ggplot(OCC_Mav1, aes(x=TIME, y=DV)) + geom_point() + theme_classic() + labs(title = "DV vs. Time", x="DV", y="Time")
+
+plot_DV_vs_time1
+
+
+DV_Mav1 <- OCC_Mav1 %>% filter(DV > 0)
+DV_Mav1 <- DV_Mav1 %>% filter(DV > 0)
+DV_Mav1 <- na.omit(DV_Mav1)
+
+#Take a squinty
+dplyr::glimpse(DV_Mav1)
+summary(DV_Mav1)
+head(DV_Mav1)
+skimr::skim(DV_Mav1)
+
+#Save a rds version
+save_data_location <- here::here("fitting-exercise","DV_Mav1.rds")
+saveRDS(DV_Mav1, file = save_data_location)
+
+#Save a csv version -- Just looking at it so see if all the data is still there.
+save_data_location <- here::here("fitting-exercise","DV_Mav1.csv")
+write.csv(DV_Mav1, file = save_data_location)
+
+#Why the heck did I do this part???
+
+```
+
+```{r}
+
+suppressPackageStartupMessages(library(dplyr)) 
+
+df_Y <- OCC_Mav1 %>% filter(TIME > 0) %>% group_by(ID) %>% summarise(Y=sum(DV))
+
+df_time0 <- OCC_Mav1 %>% filter(TIME == 0)
+
+Combo_Mav1 <- left_join(df_Y, df_time0, by = "ID")
+
+#Take a squinty
+dplyr::glimpse(Combo_Mav1)
+summary(Combo_Mav1)
+head(Combo_Mav1)
+skimr::skim(Combo_Mav1)
+
+#Okay, now let's tighten this up and lose some excess...
+
+#First, let's get rid of the extra stuff...
+
+Combo_Mav1 <- Combo_Mav1 %>% 
+  select(Y,DOSE,AGE,SEX,RACE,WT,HT)
+
+#Save a rds version
+save_data_location <- here::here("fitting-exercise","Combo_mav1.rds")
+saveRDS(Combo_Mav1, file = save_data_location)
+
+#Save a csv version -- Just looking at it so see if all the data is still there.
+save_data_location <- here::here("fitting-exercise","Combo_mav1.csv")
+write.csv(Combo_Mav1, file = save_data_location)
+
+```
+
+```{r}
+library("ggplot2")
+
+#Linear Regression of Data Sets
+
+#Y_vs_AGE
+lmfit1 <- lm(Y ~ AGE, Combo_Mav1)  
+
+#Place results from fit into a data frame with the tidy function
+lmtable1 <- broom::tidy(lmfit1)
+
+#Look at fit results
+print(lmtable1)
+
+plot_Y_vs_AGE <- ggplot(Combo_Mav1, aes(x=AGE, y=Y)) + geom_point() + theme_classic() + labs(title = "Y vs. AGE", x="AGE", y="Y")
+
+plot_Y_vs_AGE
+
+Mav_bar_plot1 <- ggplot(Combo_Mav1, aes(x = AGE, y = Y)) + geom_bar(stat = "identity", position = "dodge", color = "magenta") +
+labs(title = "Total Dose by AGE", x = "AGE", y = "Total Dose") +  
+guides(x =  guide_axis(angle = 90)) +
+theme_minimal() 
+
+Mav_bar_plot1
+
+#Save fit results table  
+table_file1 = here("fitting-exercise", "Y_vs_AGE_table.rds")
+saveRDS(lmtable1, file = table_file1)
+
+#Y_vs_SEX
+lmfit2 <- lm(Y ~ SEX, Combo_Mav1)  
+
+#Place results from fit into a data frame with the tidy function
+lmtable2 <- broom::tidy(lmfit2)
+
+#Look at fit results
+print(lmtable2)
+
+plot_Y_vs_SEX <- ggplot(Combo_Mav1, aes(x=SEX, y=Y)) + geom_point() + theme_classic() + labs(title = "Y vs. SEX", x="SEX", y="Y")
+
+plot_Y_vs_SEX
+
+Mav_bar_plot2 <- ggplot(Combo_Mav1, aes(x = SEX, y = Y)) + geom_bar(stat = "identity", position = "dodge", color = "blue") +
+labs(title = "Total Dose by Sex", x = "SEX", y = "Total Dose") +  
+guides(x =  guide_axis(angle = 90)) +
+theme_minimal() 
+
+Mav_bar_plot2
+
+#Save fit results table  
+table_file2 = here("fitting-exercise", "Y_vs_SEX_table.rds")
+saveRDS(lmtable2, file = table_file2)
+
+#Y_vs_WT
+lmfit3 <- lm(Y ~ WT, Combo_Mav1)  
+
+#Place results from fit into a data frame with the tidy function
+lmtable3 <- broom::tidy(lmfit3)
+
+#Look at fit results
+print(lmtable3)
+
+#Save fit results table  
+table_file3 = here("data-exercise", "Y_vs_WT_table.rds")
+saveRDS(lmtable3, file = table_file3)
+
+plot_Y_vs_WT <- ggplot(Combo_Mav1, aes(x=WT, y=Y)) + geom_point() + theme_classic() + labs(title = "Y vs. WT", x="WT", y="Y")
+
+plot_Y_vs_WT
+
+Mav_bar_plot3 <- ggplot(Combo_Mav1, aes(x = WT, y = Y)) + geom_bar(stat = "identity", position = "dodge", color = "red") +
+labs(title = "Total Dose by WT", x = "WT", y = "Total Dose") +  
+guides(x =  guide_axis(angle = 90)) +
+theme_minimal() 
+
+Mav_bar_plot3
+
+#Y_vs_HT
+lmfit4 <- lm(Y ~ HT, Combo_Mav1)  
+
+#Place results from fit into a data frame with the tidy function
+lmtable4 <- broom::tidy(lmfit4)
+
+#Look at fit results
+print(lmtable4)
+
+#Save fit results table  
+table_file4 = here("data-exercise", "Y_vs_HT_table.rds")
+saveRDS(lmtable4, file = table_file4)
+
+plot_Y_vs_HT <- ggplot(Combo_Mav1, aes(x=HT, y=Y)) + geom_point() + theme_classic() + labs(title = "Y vs. HT", x="SEX", y="Y")
+
+plot_Y_vs_HT
+
+Mav_bar_plot4 <- ggplot(Combo_Mav1, aes(x = HT, y = Y)) + geom_bar(stat = "identity", position = "dodge", color = "purple") +
+labs(title = "Total Dose by HT", x = "HT", y = "Total Dose") +  
+guides(x =  guide_axis(angle = 90)) +
+theme_minimal() 
+
+Mav_bar_plot4
+
+```
