@@ -227,3 +227,69 @@ theme_minimal()
 Mav_bar_plot4
 
 ```
+
+```{r}
+#Okay, let's take a look at what we have going on here.
+
+print(Combo_Mav1)
+
+#Now let's do a linear fit for y= dose and x1 = age, x2 = sex, x3 = race, x4 = wt, and x5 = HT.
+
+lmfitB1 <- lm(DOSE ~ AGE + SEX + RACE + WT + HT, Combo_Mav1)  
+
+# place results from fit into a data frame with the tidy function
+lmtableB1 <- broom::tidy(lmfitB1)
+
+#look at fit results
+print(lmtableB1)
+
+# save fit results table  
+table_fileB1 = here("data-exercise", "fit1_table.rds")
+saveRDS(lmtableB1, file = table_fileB1)
+
+#Now we will repeat with SEX.
+
+lmfitB2 <- lm(DOSE ~ SEX, Combo_Mav1)  
+
+# place results from fit into a data frame with the tidy function
+lmtableB2 <- broom::tidy(lmfitB2)
+
+#look at fit results
+print(lmtableB2)
+
+# save fit results table  
+table_fileB2 = here("data-exercise", "fit1_table.rds")
+saveRDS(lmtableB2, file = table_fileB2)
+
+#I'm plotting this one!
+
+plot_SEX_vs_WT <- ggplot(Combo_Mav1, aes(x=SEX, y=DOSE)) + geom_point() + theme_classic() + labs(title = "SEX vs. DOSE", x="SEX", y="DOSE")
+
+plot_SEX_vs_WT
+
+plot_lin_fit <- ggplot(Combo_Mav1, aes(x = SEX, y = DOSE)) + geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "blue") + 
+  labs(title = "DOSE by SEX", x = "SEX", y = "DOSE") +
+  theme_minimal()
+
+plot_lin_fit
+
+#Wow!  That is soooo unremarkable.
+
+#AND AGAIN, to model SEX using all predictors...
+
+lmfitB3 <- lm(SEX ~ AGE + DOSE + RACE + WT + HT, Combo_Mav1)  
+
+# place results from fit into a data frame with the tidy function
+lmtableB3 <- broom::tidy(lmfitB3)
+
+#look at fit results
+print(lmtableB3)
+
+# save fit results table  
+table_fileB3 = here("data-exercise", "fit1_table.rds")
+saveRDS(lmtableB3, file = table_fileB3)
+
+
+
+```
