@@ -19,6 +19,10 @@ suppressPackageStartupMessages(library(gt))
 suppressPackageStartupMessages(library(dslabs))
 suppressPackageStartupMessages(library(plotly))
 suppressPackageStartupMessages(library(gapminder))
+suppressPackageStartupMessages(library(parsnip))
+suppressPackageStartupMessages(library(tune))
+suppressPackageStartupMessages(library(recipes))
+suppressPackageStartupMessages(library(workflows))
 
 #Load excel data file
 data_location <- here::here("fitting-exercise","Mavoglurant_A2121_nmpk.csv")
@@ -289,6 +293,18 @@ table_fileB3 = here("fitting-exercise", "fitB3_table.rds")
 saveRDS(lmtableB3, file = table_fileB3)
 
 
+#Trying to mutate the variables again.  I did not suceed with this operation before.  
+
+Combo_Mav1 <- Combo_Mav1 %>% mutate(
+  SEX = ifelse(SEX == 1, "M", "F" ),
+  SEX = factor(SEX)
+  )
+
+print(Combo_Mav1)
+
+#okay, did it.  
+
+
 
 ```
 
@@ -351,12 +367,6 @@ print(rmse1)
 
 lmfitC2 <- lm(Y ~ AGE + DOSE + SEX + WT + HT, train_data) 
 
-#Trying it this way.
-linear_reg() %>% set_engine("keras")
-model_trial <- linear_reg()
-fit_trial <- model_trial %>% fit(Y ~ AGE * DOSE * SEX * WT * HT, data = train_data)
-
-print(fit_trial)
 
 # place results from fit into a data frame with the tidy function
 lmtableC2 <- broom::tidy(lmfitC2)
@@ -382,17 +392,94 @@ print(rmse2)
 
 #Null Data?  I am completely lost here.
 
+```
+```{r}
+
+linear_reg() %>% set_engine("glm")
+model_trial <- linear_reg()
+
 null_data <- null_model() %>% 
   set_engine("parsnip") %>% 
   set_mode("regression") %>% 
   translate()
 
-null_data %>% parsnip::fit(Y ~ AGE * DOSE * SEX * WT * HT, data = train_data)
-null_fit <- model_trial %>% fit(Y ~ AGE * DOSE * SEX * WT * HT, data = train_data)
+null_data %>% parsnip::fit(Y ~ ., data = train_data)
+null_fit <- null_data %>% fit(Y ~ AGE * DOSE * SEX * WT * HT, data = train_data)
 predictions <- predict(null_fit, train_data)
 residuals <- null_data$Y - predictions
 rmse <- sqrt(mean(residuals^2))
 print(rmse)
+
+#It runs without error, but I get no values.  I don't know what I am doing here.  I do not understand the syntax.
+
+```
+
+```{r}
+
+#Trying it all with a model.
+
+#Trying it this way... with train data.
+linear_reg() %>% set_engine("glm")
+model_trial <- linear_reg()
+fit_trial1 <- model_trial %>% fit(Y ~ AGE * DOSE * SEX * WT * HT, data = train_data)
+
+tidy(fit_trial1)
+
+predictions <- predict(fit_trial1, train_data)
+residuals_mod <- train_data$Y - predictions
+rmse_mod <- sqrt(mean(residuals_mod^2))
+print(rmse_mod)
+
+
+
+
+
+```
+
+```{r}
+#Okay, now we are going to evaluate our model.
+suppressPackageStartupMessages(library(modeldata))
+suppressPackageStartupMessages(library(recipes))
+
+
+rnseed = 1234
+set.seed(rnseed)
+
+data_split <- initial_split(Combo_Mav2, prop = 0.9)
+
+# Create data frames for the two sets:
+train_data2 <- training(data_split)
+test_data2  <- testing(data_split)
+
+print(train_data2)
+print(test_data2)
+
+data(Combo_Mav2)
+rec_data2 <- recipe(Y ~ ., data = Combo_Mav2)
+
+rec_data2
+
+print(rec_data2)
+
+# Define the linear regression model
+model_trial <- linear_reg() %>% set_engine("glm") %>% translate()
+
+# Define the 10-fold cross-validation plan
+cv <- vfold_cv(train_data2, v = 10, repeats =10, strata = NULL)
+
+#okay, if I use Combo_mav2 then I get an error in the next line:  Must perform recipe.
+#If I use a recipe then I just get a null set.
+
+# Perform cross-validation
+lm_results <- fit_resamples(
+  model_trial,
+  cv,
+  metrics = metric_set(rmse, rsq)
+)
+
+# Summarize the results
+summary(lm_results)
+
 
 
 
