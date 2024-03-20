@@ -349,7 +349,14 @@ print(rmse1)
 
 #Then All of them!
 
-lmfitC2 <- lm(Y ~ AGE + DOSE + SEX + WT + HT, train_data)  
+lmfitC2 <- lm(Y ~ AGE + DOSE + SEX + WT + HT, train_data) 
+
+#Trying it this way.
+linear_reg() %>% set_engine("keras")
+model_trial <- linear_reg()
+fit_trial <- model_trial %>% fit(Y ~ AGE * DOSE * SEX * WT * HT, data = train_data)
+
+print(fit_trial)
 
 # place results from fit into a data frame with the tidy function
 lmtableC2 <- broom::tidy(lmfitC2)
@@ -379,6 +386,13 @@ null_data <- null_model() %>%
   set_engine("parsnip") %>% 
   set_mode("regression") %>% 
   translate()
+
+null_data %>% parsnip::fit(Y ~ AGE * DOSE * SEX * WT * HT, data = train_data)
+null_fit <- model_trial %>% fit(Y ~ AGE * DOSE * SEX * WT * HT, data = train_data)
+predictions <- predict(null_fit, train_data)
+residuals <- null_data$Y - predictions
+rmse <- sqrt(mean(residuals^2))
+print(rmse)
 
 
 
