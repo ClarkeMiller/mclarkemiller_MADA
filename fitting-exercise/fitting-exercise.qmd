@@ -1,5 +1,3 @@
-
-
 ![](Ripe%20Pineapple%20Narrow.jpg)
 
 ---
@@ -188,7 +186,7 @@ lmtable3 <- broom::tidy(lmfit3)
 print(lmtable3)
 
 #Save fit results table  
-table_file3 = here("data-exercise", "Y_vs_WT_table.rds")
+table_file3 = here("fitting-exercise", "Y_vs_WT_table.rds")
 saveRDS(lmtable3, file = table_file3)
 
 plot_Y_vs_WT <- ggplot(Combo_Mav1, aes(x=WT, y=Y)) + geom_point() + theme_classic() + labs(title = "Y vs. WT", x="WT", y="Y")
@@ -212,7 +210,7 @@ lmtable4 <- broom::tidy(lmfit4)
 print(lmtable4)
 
 #Save fit results table  
-table_file4 = here("data-exercise", "Y_vs_HT_table.rds")
+table_file4 = here("fitting-exercise", "Y_vs_HT_table.rds")
 saveRDS(lmtable4, file = table_file4)
 
 plot_Y_vs_HT <- ggplot(Combo_Mav1, aes(x=HT, y=Y)) + geom_point() + theme_classic() + labs(title = "Y vs. HT", x="SEX", y="Y")
@@ -244,7 +242,7 @@ lmtableB1 <- broom::tidy(lmfitB1)
 print(lmtableB1)
 
 # save fit results table  
-table_fileB1 = here("data-exercise", "fit1_table.rds")
+table_fileB1 = here("fitting-exercise", "fitB1_table.rds")
 saveRDS(lmtableB1, file = table_fileB1)
 
 #Now we will repeat with SEX.
@@ -258,7 +256,7 @@ lmtableB2 <- broom::tidy(lmfitB2)
 print(lmtableB2)
 
 # save fit results table  
-table_fileB2 = here("data-exercise", "fit1_table.rds")
+table_fileB2 = here("fitting-exercise", "fitB2_table.rds")
 saveRDS(lmtableB2, file = table_fileB2)
 
 #I'm plotting this one!
@@ -287,8 +285,100 @@ lmtableB3 <- broom::tidy(lmfitB3)
 print(lmtableB3)
 
 # save fit results table  
-table_fileB3 = here("data-exercise", "fit1_table.rds")
+table_fileB3 = here("fitting-exercise", "fitB3_table.rds")
 saveRDS(lmtableB3, file = table_fileB3)
+
+
+
+```
+
+## NEW STUFF FOR Unit 10.
+
+```{r}
+# Setting that seed. (I'm already looking aroind at the lifeguard chairs because I'm in over my head, but Allons-y!)
+
+rngseed = 1234
+
+#Getting rid of RACE.
+
+Combo_Mav2 <- Combo_Mav1 %>% 
+  select(Y,DOSE,AGE,SEX,WT,HT)
+
+print(Combo_Mav2)
+
+#Okay, this water is a bit deep for me.
+set.seed(rngseed)
+
+data_split <- initial_split(Combo_Mav2, prop = 3/4)
+
+# Create data frames for the two sets:
+train_data <- training(data_split)
+test_data  <- testing(data_split)
+
+print(train_data)
+print(test_data)
+
+#Okay, that worked.  What now?  Fit models to outcome Y for dose and all remaining variables?  And find the RMSE.  Okay. Here goes.
+
+
+#First, DOSE.
+
+lmfitC1 <- lm(Y ~ DOSE, train_data)  
+
+# place results from fit into a data frame with the tidy function
+lmtableC1 <- broom::tidy(lmfitC1)
+
+#look at fit results
+print(lmtableC1)
+
+# save fit results table  
+table_fileC1 = here("fitting-exercise", "fitC1_table.rds")
+saveRDS(lmtableC1, file = table_fileC1)
+
+# Predict the values using the model
+predictions <- predict(lmfitC1, train_data)
+
+# Calculate the residuals (differences between observed and predicted values)
+residuals1 <- train_data$Y - predictions
+
+# Calculate the RMSE
+rmse1 <- sqrt(mean(residuals1^2))
+
+# Print the RMSE
+print(rmse1)
+
+#Then All of them!
+
+lmfitC2 <- lm(Y ~ AGE + DOSE + SEX + WT + HT, train_data)  
+
+# place results from fit into a data frame with the tidy function
+lmtableC2 <- broom::tidy(lmfitC2)
+
+#look at fit results
+print(lmtableC2)
+
+# save fit results table  
+table_fileC2 = here("fitting-exercise", "fitC2_table.rds")
+saveRDS(lmtableC2, file = table_fileC2)
+
+# Predict the values using the model
+predictions <- predict(lmfitC2, train_data)
+
+# Calculate the residuals (differences between observed and predicted values)
+residuals2 <- train_data$Y - predictions
+
+# Calculate the RMSE
+rmse2 <- sqrt(mean(residuals2^2))
+
+# Print the RMSE
+print(rmse2)
+
+#Null Data?  I am completely lost here.
+
+null_data <- null_model() %>% 
+  set_engine("parsnip") %>% 
+  set_mode("regression") %>% 
+  translate()
 
 
 

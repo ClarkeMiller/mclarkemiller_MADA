@@ -1885,7 +1885,7 @@ $ HT   &lt;dbl&gt; 1.769997, 1.759850, 1.809847, 1.649993, 1.560052, 1.829862, 1
 2 WT             -16.3      6.91     -2.37 0.0196       </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Save fit results table  </span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>table_file3 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"data-exercise"</span>, <span class="st">"Y_vs_WT_table.rds"</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>table_file3 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"fitting-exercise"</span>, <span class="st">"Y_vs_WT_table.rds"</span>)</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(lmtable3, <span class="at">file =</span> table_file3)</span>
 <span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>plot_Y_vs_WT <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Combo_Mav1, <span class="fu">aes</span>(<span class="at">x=</span>WT, <span class="at">y=</span>Y)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Y vs. WT"</span>, <span class="at">x=</span><span class="st">"WT"</span>, <span class="at">y=</span><span class="st">"Y"</span>)</span>
@@ -1927,7 +1927,7 @@ $ HT   &lt;dbl&gt; 1.769997, 1.759850, 1.809847, 1.649993, 1.560052, 1.829862, 1
 2 HT            -1781.     1022.     -1.74 0.0841 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Save fit results table  </span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>table_file4 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"data-exercise"</span>, <span class="st">"Y_vs_HT_table.rds"</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>table_file4 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"fitting-exercise"</span>, <span class="st">"Y_vs_HT_table.rds"</span>)</span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(lmtable4, <span class="at">file =</span> table_file4)</span>
 <span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>plot_Y_vs_HT <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Combo_Mav1, <span class="fu">aes</span>(<span class="at">x=</span>HT, <span class="at">y=</span>Y)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Y vs. HT"</span>, <span class="at">x=</span><span class="st">"SEX"</span>, <span class="at">y=</span><span class="st">"Y"</span>)</span>
@@ -1995,7 +1995,7 @@ $ HT   &lt;dbl&gt; 1.769997, 1.759850, 1.809847, 1.649993, 1.560052, 1.829862, 1
 6 HT          -20.7      21.0       -0.986  0.326 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save fit results table  </span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>table_fileB1 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"data-exercise"</span>, <span class="st">"fit1_table.rds"</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>table_fileB1 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"fitting-exercise"</span>, <span class="st">"fitB1_table.rds"</span>)</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(lmtableB1, <span class="at">file =</span> table_fileB1)</span>
 <span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Now we will repeat with SEX.</span></span>
@@ -2015,7 +2015,7 @@ $ HT   &lt;dbl&gt; 1.769997, 1.759850, 1.809847, 1.649993, 1.560052, 1.829862, 1
 2 SEX            -4.21      3.18     -1.32 1.88e- 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save fit results table  </span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>table_fileB2 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"data-exercise"</span>, <span class="st">"fit1_table.rds"</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>table_fileB2 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"fitting-exercise"</span>, <span class="st">"fitB2_table.rds"</span>)</span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(lmtableB2, <span class="at">file =</span> table_fileB2)</span>
 <span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co">#I'm plotting this one!</span></span>
@@ -2069,11 +2069,166 @@ $ HT   &lt;dbl&gt; 1.769997, 1.759850, 1.809847, 1.649993, 1.560052, 1.829862, 1
 6 HT          -2.26        0.426     -5.31   5.55e- 7</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save fit results table  </span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>table_fileB3 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"data-exercise"</span>, <span class="st">"fit1_table.rds"</span>)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>table_fileB3 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"fitting-exercise"</span>, <span class="st">"fitB3_table.rds"</span>)</span>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(lmtableB3, <span class="at">file =</span> table_fileB3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="new-stuff-for-unit-10." class="level2">
+<h2 class="anchored" data-anchor-id="new-stuff-for-unit-10.">NEW STUFF FOR Unit 10.</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting that seed. (I'm already looking aroind at the lifeguard chairs because I'm in over my head, but Allons-y!)</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>rngseed <span class="ot">=</span> <span class="dv">1234</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting rid of RACE.</span></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>Combo_Mav2 <span class="ot">&lt;-</span> Combo_Mav1 <span class="sc">%&gt;%</span> </span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Y,DOSE,AGE,SEX,WT,HT)</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Combo_Mav2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 120 × 6
+       Y  DOSE   AGE   SEX    WT    HT
+   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 2691.    25    42     1  94.3  1.77
+ 2 2639.    25    24     1  80.4  1.76
+ 3 2150.    25    31     1  71.8  1.81
+ 4 1789.    25    46     2  77.4  1.65
+ 5 3126.    25    41     2  64.3  1.56
+ 6 2337.    25    27     1  74.1  1.83
+ 7 3007.    25    23     1  87.9  1.85
+ 8 2796.    25    20     1  61.9  1.73
+ 9 3866.    25    23     1  65.3  1.65
+10 1762.    25    28     1 104.   1.84
+# ℹ 110 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Okay, this water is a bit deep for me.</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(rngseed)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>data_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Combo_Mav2, <span class="at">prop =</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>)</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frames for the two sets:</span></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">training</span>(data_split)</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>test_data  <span class="ot">&lt;-</span> <span class="fu">testing</span>(data_split)</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(train_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 90 × 6
+       Y  DOSE   AGE   SEX    WT    HT
+   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 3004.  50      28     1  83.2  1.74
+ 2 1347.  25      41     1  81    1.75
+ 3 2772.  37.5    28     1  78.3  1.72
+ 4 2028.  25      28     2  58.9  1.58
+ 5 2353.  50      37     1  99.1  1.78
+ 6  826.  25      30     1 105.   1.88
+ 7 3866.  25      23     1  65.3  1.65
+ 8 3126.  25      41     2  64.3  1.56
+ 9 1108.  25      48     2  79.5  1.62
+10 2815.  37.5    26     1  84.5  1.77
+# ℹ 80 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(test_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 6
+       Y  DOSE   AGE   SEX    WT    HT
+   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 2549.  25      46     1  83    1.78
+ 2 2353.  37.5    43     2  64.4  1.56
+ 3 2009.  37.5    19     1  86.1  1.91
+ 4 2934.  37.5    46     1  71.2  1.67
+ 5 2085.  37.5    37     1 102.   1.81
+ 6 4835.  50      42     2  58    1.58
+ 7 3514.  50      32     1  78.9  1.74
+ 8 3906.  50      47     1  89.3  1.69
+ 9 3105.  50      45     1  99.1  1.81
+10 2027.  25      20     1  80.5  1.88
+# ℹ 20 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Okay, that worked.  What now?  Fit models to outcome Y for dose and all remaining variables?  And find the RMSE.  Okay. Here goes.</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co">#First, DOSE.</span></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>lmfitC1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> DOSE, train_data)  </span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a><span class="co"># place results from fit into a data frame with the tidy function</span></span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>lmtableC1 <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(lmfitC1)</span>
+<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a><span class="co">#look at fit results</span></span>
+<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lmtableC1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    535.     244.        2.19 3.08e- 2
+2 DOSE            53.4      6.29      8.50 4.41e-13</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save fit results table  </span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>table_fileC1 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"fitting-exercise"</span>, <span class="st">"fitC1_table.rds"</span>)</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(lmtableC1, <span class="at">file =</span> table_fileC1)</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the values using the model</span></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(lmfitC1, train_data)</span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the residuals (differences between observed and predicted values)</span></span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>residuals1 <span class="ot">&lt;-</span> train_data<span class="sc">$</span>Y <span class="sc">-</span> predictions</span>
+<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the RMSE</span></span>
+<span id="cb72-12"><a href="#cb72-12" aria-hidden="true" tabindex="-1"></a>rmse1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>(residuals1<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb72-13"><a href="#cb72-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-14"><a href="#cb72-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the RMSE</span></span>
+<span id="cb72-15"><a href="#cb72-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rmse1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 702.8078</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Then All of them!</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>lmfitC2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> AGE <span class="sc">+</span> DOSE <span class="sc">+</span> SEX <span class="sc">+</span> WT <span class="sc">+</span> HT, train_data)  </span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="co"># place results from fit into a data frame with the tidy function</span></span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>lmtableC2 <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(lmfitC2)</span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a><span class="co">#look at fit results</span></span>
+<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lmtableC2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  term         estimate std.error statistic  p.value
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)  4966.      2328.      2.13   3.58e- 2
+2 AGE            -0.417      9.50   -0.0439 9.65e- 1
+3 DOSE           55.3        5.83    9.49   6.09e-15
+4 SEX          -569.       285.     -1.99   4.95e- 2
+5 WT            -22.6        7.65   -2.96   4.00e- 3
+6 HT          -1130.      1358.     -0.832  4.08e- 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save fit results table  </span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>table_fileC2 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"fitting-exercise"</span>, <span class="st">"fitC2_table.rds"</span>)</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(lmtableC2, <span class="at">file =</span> table_fileC2)</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the values using the model</span></span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(lmfitC2, train_data)</span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the residuals (differences between observed and predicted values)</span></span>
+<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>residuals2 <span class="ot">&lt;-</span> train_data<span class="sc">$</span>Y <span class="sc">-</span> predictions</span>
+<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-11"><a href="#cb76-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the RMSE</span></span>
+<span id="cb76-12"><a href="#cb76-12" aria-hidden="true" tabindex="-1"></a>rmse2 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>(residuals2<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb76-13"><a href="#cb76-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-14"><a href="#cb76-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the RMSE</span></span>
+<span id="cb76-15"><a href="#cb76-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rmse2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 627.4408</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Null Data?  I am completely lost here.</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>null_data <span class="ot">&lt;-</span> <span class="fu">null_model</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"parsnip"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">translate</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
