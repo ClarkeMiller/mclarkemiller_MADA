@@ -1,0 +1,210 @@
+---
+title: "ml-models-exercise"
+author: "Clarke Miller"
+editor: visual
+---
+
+```{r}
+#Call a bunch of libraries.
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(tidymodels))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(broom)) 
+suppressPackageStartupMessages(library(here))
+suppressPackageStartupMessages(library(readxl))
+suppressPackageStartupMessages(library(readr)) 
+suppressPackageStartupMessages(library(dplyr)) 
+suppressPackageStartupMessages(library(tidyr)) 
+suppressPackageStartupMessages(library(skimr))
+suppressPackageStartupMessages(library(gt))
+suppressPackageStartupMessages(library(dslabs))
+suppressPackageStartupMessages(library(plotly))
+suppressPackageStartupMessages(library(gapminder))
+suppressPackageStartupMessages(library(parsnip))
+suppressPackageStartupMessages(library(tune))
+suppressPackageStartupMessages(library(recipes))
+suppressPackageStartupMessages(library(workflows))
+suppressPackageStartupMessages(library(yardstick))
+suppressPackageStartupMessages(library(rsample))
+suppressPackageStartupMessages(library(modeldata))
+
+
+#Spring planting.
+rngseed = 1234
+
+```
+
+```{r}
+
+#Data processing.
+
+#Redoing the data from scratch.  I believe that the "7" in the original data was for native american/pacific islander, the "88" may have been for "other".
+
+#Load excel data file
+data_location <- here::here("ml-models-exercise", "Mavoglurant_A2121_nmpk.csv")
+Mav_data <- read.csv(data_location)
+
+#Save a rds version
+save_data_location <- here::here("ml-models-exercise", "mav_data.rds")
+saveRDS(Mav_data, file = save_data_location)
+
+
+#Keeping only OCC=1.
+OCC_Mav1 <- Mav_data %>% filter(OCC == 1)
+OCC_Mav1 <- OCC_Mav1 %>% filter(OCC == 1)
+OCC_Mav1 <- na.omit(OCC_Mav1)
+
+DV_Mav1 <- OCC_Mav1 %>% filter(DV > 0)
+DV_Mav1 <- DV_Mav1 %>% filter(DV > 0)
+DV_Mav1 <- na.omit(DV_Mav1)
+
+df_Y <- OCC_Mav1 %>% filter(TIME > 0) %>% group_by(ID) %>% summarise(Y=sum(DV))
+df_time0 <- OCC_Mav1 %>% filter(TIME == 0)
+Combo_Mav1 <- left_join(df_Y, df_time0, by = "ID")
+
+Combo_Mav1 <- Combo_Mav1 %>% 
+  select(Y,DOSE,AGE,SEX,RACE,WT,HT)
+
+Combo_Mav1 <- Combo_Mav1 %>% mutate(RACE = ifelse(RACE %in% c(7,88), 3, RACE ))
+Combo_Mav1 <- Combo_Mav1 %>% mutate(RACE = factor(RACE))
+
+#HT is in meters, WT is in kilograms.
+Combo_Mav1$BMI <- Combo_Mav1$WT / ((Combo_Mav1$HT)^2)  
+
+Combo_Mav1 <- Combo_Mav1 %>% mutate(
+  SEX = ifelse(SEX == 1, "M", "F" ),
+  SEX = factor(SEX)
+  )
+
+print(Combo_Mav1)
+
+#Save a rds version
+save_data_location <- here::here("Combo_Mav1.rds")
+saveRDS(Combo_Mav1, file = save_data_location)
+
+#Okay, that looks pretty good.
+
+
+```
+
+```{r}
+#Making the training/testing data.
+set.seed(rngseed)
+
+data_split <- initial_split(Combo_Mav1, prop = 3/4)
+
+train_data <- training(data_split)
+test_data  <- testing(data_split)
+
+print(train_data)
+print(test_data)
+
+#I kept getting an error Warning: NAs introduced by coercion", so I am replacing M/F with 1/2.
+train_data1 <- train_data
+train_data1 <- train_data1 %>% mutate(
+  SEX = ifelse(SEX == "M", 1, 2 ),
+  SEX = factor(SEX)
+  )
+
+
+#Logistic Model of all data with all variables.  
+MAV_log_model <- glm(Y ~ ., data = train_data1)
+tableA1 <- broom::tidy(MAV_log_model)
+print(tableA1)
+
+#Trying it this way... with train data.
+linear_reg() %>% set_engine("glm")
+model_trial <- linear_reg()
+fit_trial1 <- model_trial %>% fit(Y ~ ., data = train_data1)
+
+tidy(fit_trial1)
+
+predictions <- predict(fit_trial1, train_data1)
+residuals_mod <- train_data1$Y - predictions
+rmse_mod <- sqrt(mean(residuals_mod^2))
+
+print(rmse_mod)
+
+```
+
+```{r}
+
+
+#LASSO Regression Model.
+suppressPackageStartupMessages(library(glmnet))
+
+X <- as.matrix(train_data1[,c("DOSE","AGE","SEX","RACE","WT","HT", "BMI")])
+Y <- train_data1$Y
+
+MAV_LASSO_cv <- cv.glmnet(X,Y, alpha = 1)
+optimal_lambda <- MAV_LASSO_cv$lambda.min
+
+coef(MAV_LASSO_cv)
+
+print(MAV_LASSO_cv)
+
+plot(MAV_LASSO_cv)
+
+MAV_LASSO_cv1 <- glmnet(X, Y, alpha = 1, lambda = optimal_lambda)
+
+coef(MAV_LASSO_cv1)
+
+print(MAV_LASSO_cv1)
+
+plot(MAV_LASSO_cv1)  #Why am I getting an empty plot here?
+
+#I optimized instead of just setting lambda to 0.1.  As it turns out, the optimal value is approximately 0.1.
+#Let's just keep it un-optimized.
+
+MAV_LASSO <- glmnet(X, Y, alpha = 1, lambda = optimal_lambda)
+
+print(MAV_LASSO)
+
+plot(MAV_LASSO)
+
+
+y_predicted <- predict(MAV_LASSO, s = optimal_lambda, newx = X)
+sst <- sum((Y - mean(Y))^2)
+sse <- sum((y_predicted - Y)^2)
+rsq <- 1 - sse/sst
+print(rsq)
+
+
+```
+
+```{r}
+
+#Random Forest Model:
+
+suppressPackageStartupMessages(library(parsnip))
+suppressPackageStartupMessages(library(ranger))
+suppressPackageStartupMessages(library(dplyr))
+
+MAV_rf_model <- ranger(Y ~ ., data = train_data1)
+
+print(MAV_rf_model)
+
+rf_model <- rand_forest() %>% set_mode("regression") %>% set_engine("ranger", seed = rngseed)
+
+MAV_rf_model1 <- fit(rf_model, data = train_data1, formula(Y ~ .))
+
+print(MAV_rf_model1)
+
+#I got the exact same thing for both outputs, so I might have done something right... or the same thing wrong twice. ¯\_(ツ)_/¯
+
+
+```
+
+## The R coding is beyond me for this part. I don't even know where to start.
+
+library(rpart.plot) \# for visualizing a decision tree library(vip) \# for variable importance plots
+
+bootstrap_rset_data \<- bootstraps(train_data1, times = 100)
+
+tune_spec \<- decision_tree( cost_complexity = tune(), tree_depth = tune() ) %\>% set_engine("rpart") %\>% set_mode("classification")
+
+tree_grid \<- grid_regular(cost_complexity(), tree_depth(), levels = 5)
+
+#Linear Model rf_model_wf \<- workflow() %\>% add_model(rf_model) %\>% add_formula(class \~ .)
+
+rf_model_res \<- rf_model_wf %\>% tune_grid( resamples = bootstrap_rset_data, grid = tree_grid )

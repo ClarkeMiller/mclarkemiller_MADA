@@ -1,0 +1,486 @@
+![](Ripe%20Pineapple%20Narrow.jpg)
+
+---
+title: "Fitting Exercise"
+---
+
+
+#Call a bunch of libraries.
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(tidymodels))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(broom)) 
+suppressPackageStartupMessages(library(here))
+suppressPackageStartupMessages(library(readxl)) 
+suppressPackageStartupMessages(library(dplyr)) 
+suppressPackageStartupMessages(library(tidyr)) 
+suppressPackageStartupMessages(library(skimr))
+suppressPackageStartupMessages(library(gt))
+suppressPackageStartupMessages(library(dslabs))
+suppressPackageStartupMessages(library(plotly))
+suppressPackageStartupMessages(library(gapminder))
+suppressPackageStartupMessages(library(parsnip))
+suppressPackageStartupMessages(library(tune))
+suppressPackageStartupMessages(library(recipes))
+suppressPackageStartupMessages(library(workflows))
+
+#Load excel data file
+data_location <- here::here("Mavoglurant_A2121_nmpk.csv")
+Mav_data <- read.csv(data_location)
+
+#Take a squinty
+dplyr::glimpse(Mav_data)
+summary(Mav_data)
+head(Mav_data)
+skimr::skim(Mav_data)
+
+
+#Save a rds version
+save_data_location <- here::here("mav_data.rds")
+saveRDS(Mav_data, file = save_data_location)
+
+
+
+
+#plots
+
+library("ggplot2")
+
+plot_DV_vs_time <- ggplot(Mav_data, aes(x=TIME, y=DV)) + geom_point() + theme_classic() + labs(title = "DV vs. Time", x="DV", y="Time")
+
+plot_DV_vs_time
+
+
+
+
+#Filter a bit.  Keeping only OCC=1.
+
+OCC_Mav1 <- Mav_data %>% filter(OCC == 1)
+OCC_Mav1 <- OCC_Mav1 %>% filter(OCC == 1)
+OCC_Mav1 <- na.omit(OCC_Mav1)
+
+#Take a squinty
+dplyr::glimpse(OCC_Mav1)
+summary(OCC_Mav1)
+head(OCC_Mav1)
+skimr::skim(OCC_Mav1)
+
+library("ggplot2")
+
+plot_DV_vs_time1 <- ggplot(OCC_Mav1, aes(x=TIME, y=DV)) + geom_point() + theme_classic() + labs(title = "DV vs. Time", x="DV", y="Time")
+
+plot_DV_vs_time1
+
+
+DV_Mav1 <- OCC_Mav1 %>% filter(DV > 0)
+DV_Mav1 <- DV_Mav1 %>% filter(DV > 0)
+DV_Mav1 <- na.omit(DV_Mav1)
+
+#Take a squinty
+dplyr::glimpse(DV_Mav1)
+summary(DV_Mav1)
+head(DV_Mav1)
+skimr::skim(DV_Mav1)
+
+#Save a rds version
+save_data_location <- here::here("fitting-exercise","DV_Mav1.rds")
+saveRDS(DV_Mav1, file = save_data_location)
+
+#Save a csv version -- Just looking at it so see if all the data is still there.
+save_data_location <- here::here("fitting-exercise","DV_Mav1.csv")
+write.csv(DV_Mav1, file = save_data_location)
+
+#Why the heck did I do this part???
+
+
+
+
+
+suppressPackageStartupMessages(library(dplyr)) 
+
+df_Y <- OCC_Mav1 %>% filter(TIME > 0) %>% group_by(ID) %>% summarise(Y=sum(DV))
+
+df_time0 <- OCC_Mav1 %>% filter(TIME == 0)
+
+Combo_Mav1 <- left_join(df_Y, df_time0, by = "ID")
+
+#Take a squinty
+dplyr::glimpse(Combo_Mav1)
+summary(Combo_Mav1)
+head(Combo_Mav1)
+skimr::skim(Combo_Mav1)
+
+#Okay, now let's tighten this up and lose some excess...
+
+#First, let's get rid of the extra stuff...
+
+Combo_Mav1 <- Combo_Mav1 %>% 
+  select(Y,DOSE,AGE,SEX,RACE,WT,HT)
+
+#Save a rds version
+save_data_location <- here::here("fitting-exercise","Combo_mav1.rds")
+saveRDS(Combo_Mav1, file = save_data_location)
+
+#Save a csv version -- Just looking at it so see if all the data is still there.
+save_data_location <- here::here("fitting-exercise","Combo_mav1.csv")
+write.csv(Combo_Mav1, file = save_data_location)
+
+
+
+
+library("ggplot2")
+
+#Linear Regression of Data Sets
+
+#Y_vs_AGE
+lmfit1 <- lm(Y ~ AGE, Combo_Mav1)  
+
+#Place results from fit into a data frame with the tidy function
+lmtable1 <- broom::tidy(lmfit1)
+
+#Look at fit results
+print(lmtable1)
+
+plot_Y_vs_AGE <- ggplot(Combo_Mav1, aes(x=AGE, y=Y)) + geom_point() + theme_classic() + labs(title = "Y vs. AGE", x="AGE", y="Y")
+
+plot_Y_vs_AGE
+
+Mav_bar_plot1 <- ggplot(Combo_Mav1, aes(x = AGE, y = Y)) + geom_bar(stat = "identity", position = "dodge", color = "magenta") +
+labs(title = "Total Dose by AGE", x = "AGE", y = "Total Dose") +  
+guides(x =  guide_axis(angle = 90)) +
+theme_minimal() 
+
+Mav_bar_plot1
+
+#Save fit results table  
+table_file1 = here("fitting-exercise", "Y_vs_AGE_table.rds")
+saveRDS(lmtable1, file = table_file1)
+
+#Y_vs_SEX
+lmfit2 <- lm(Y ~ SEX, Combo_Mav1)  
+
+#Place results from fit into a data frame with the tidy function
+lmtable2 <- broom::tidy(lmfit2)
+
+#Look at fit results
+print(lmtable2)
+
+plot_Y_vs_SEX <- ggplot(Combo_Mav1, aes(x=SEX, y=Y)) + geom_point() + theme_classic() + labs(title = "Y vs. SEX", x="SEX", y="Y")
+
+plot_Y_vs_SEX
+
+Mav_bar_plot2 <- ggplot(Combo_Mav1, aes(x = SEX, y = Y)) + geom_bar(stat = "identity", position = "dodge", color = "blue") +
+labs(title = "Total Dose by Sex", x = "SEX", y = "Total Dose") +  
+guides(x =  guide_axis(angle = 90)) +
+theme_minimal() 
+
+Mav_bar_plot2
+
+#Save fit results table  
+table_file2 = here("fitting-exercise", "Y_vs_SEX_table.rds")
+saveRDS(lmtable2, file = table_file2)
+
+#Y_vs_WT
+lmfit3 <- lm(Y ~ WT, Combo_Mav1)  
+
+#Place results from fit into a data frame with the tidy function
+lmtable3 <- broom::tidy(lmfit3)
+
+#Look at fit results
+print(lmtable3)
+
+#Save fit results table  
+table_file3 = here("fitting-exercise", "Y_vs_WT_table.rds")
+saveRDS(lmtable3, file = table_file3)
+
+plot_Y_vs_WT <- ggplot(Combo_Mav1, aes(x=WT, y=Y)) + geom_point() + theme_classic() + labs(title = "Y vs. WT", x="WT", y="Y")
+
+plot_Y_vs_WT
+
+Mav_bar_plot3 <- ggplot(Combo_Mav1, aes(x = WT, y = Y)) + geom_bar(stat = "identity", position = "dodge", color = "red") +
+labs(title = "Total Dose by WT", x = "WT", y = "Total Dose") +  
+guides(x =  guide_axis(angle = 90)) +
+theme_minimal() 
+
+Mav_bar_plot3
+
+#Y_vs_HT
+lmfit4 <- lm(Y ~ HT, Combo_Mav1)  
+
+#Place results from fit into a data frame with the tidy function
+lmtable4 <- broom::tidy(lmfit4)
+
+#Look at fit results
+print(lmtable4)
+
+#Save fit results table  
+table_file4 = here("fitting-exercise", "Y_vs_HT_table.rds")
+saveRDS(lmtable4, file = table_file4)
+
+plot_Y_vs_HT <- ggplot(Combo_Mav1, aes(x=HT, y=Y)) + geom_point() + theme_classic() + labs(title = "Y vs. HT", x="SEX", y="Y")
+
+plot_Y_vs_HT
+
+Mav_bar_plot4 <- ggplot(Combo_Mav1, aes(x = HT, y = Y)) + geom_bar(stat = "identity", position = "dodge", color = "purple") +
+labs(title = "Total Dose by HT", x = "HT", y = "Total Dose") +  
+guides(x =  guide_axis(angle = 90)) +
+theme_minimal() 
+
+Mav_bar_plot4
+
+
+
+
+#Okay, let's take a look at what we have going on here.
+
+print(Combo_Mav1)
+
+#Now let's do a linear fit for y= dose and x1 = age, x2 = sex, x3 = race, x4 = wt, and x5 = HT.
+
+lmfitB1 <- lm(DOSE ~ AGE + SEX + RACE + WT + HT, Combo_Mav1)  
+
+# place results from fit into a data frame with the tidy function
+lmtableB1 <- broom::tidy(lmfitB1)
+
+#look at fit results
+print(lmtableB1)
+
+# save fit results table  
+table_fileB1 = here("fitting-exercise", "fitB1_table.rds")
+saveRDS(lmtableB1, file = table_fileB1)
+
+#Now we will repeat with SEX.
+
+lmfitB2 <- lm(DOSE ~ SEX, Combo_Mav1)  
+
+# place results from fit into a data frame with the tidy function
+lmtableB2 <- broom::tidy(lmfitB2)
+
+#look at fit results
+print(lmtableB2)
+
+# save fit results table  
+table_fileB2 = here("fitting-exercise", "fitB2_table.rds")
+saveRDS(lmtableB2, file = table_fileB2)
+
+#I'm plotting this one!
+
+plot_SEX_vs_WT <- ggplot(Combo_Mav1, aes(x=SEX, y=DOSE)) + geom_point() + theme_classic() + labs(title = "SEX vs. DOSE", x="SEX", y="DOSE")
+
+plot_SEX_vs_WT
+
+plot_lin_fit <- ggplot(Combo_Mav1, aes(x = SEX, y = DOSE)) + geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "blue") + 
+  labs(title = "DOSE by SEX", x = "SEX", y = "DOSE") +
+  theme_minimal()
+
+plot_lin_fit
+
+#Wow!  That is soooo unremarkable.
+
+#AND AGAIN, to model SEX using all predictors...
+
+lmfitB3 <- lm(SEX ~ AGE + DOSE + RACE + WT + HT, Combo_Mav1)  
+
+# place results from fit into a data frame with the tidy function
+lmtableB3 <- broom::tidy(lmfitB3)
+
+#look at fit results
+print(lmtableB3)
+
+# save fit results table  
+table_fileB3 = here("fitting-exercise", "fitB3_table.rds")
+saveRDS(lmtableB3, file = table_fileB3)
+
+
+#Trying to mutate the variables again.  I did not suceed with this operation before.  
+
+Combo_Mav1 <- Combo_Mav1 %>% mutate(
+  SEX = ifelse(SEX == 1, "M", "F" ),
+  SEX = factor(SEX)
+  )
+
+print(Combo_Mav1)
+
+#okay, did it.  
+
+
+
+
+
+## NEW STUFF FOR Unit 10.
+
+
+# Setting that seed. (I'm already looking aroind at the lifeguard chairs because I'm in over my head, but Allons-y!)
+
+rngseed = 1234
+
+#Getting rid of RACE.
+
+Combo_Mav2 <- Combo_Mav1 %>% 
+  select(Y,DOSE,AGE,SEX,WT,HT)
+
+print(Combo_Mav2)
+
+#Okay, this water is a bit deep for me.
+set.seed(rngseed)
+
+data_split <- initial_split(Combo_Mav2, prop = 3/4)
+
+# Create data frames for the two sets:
+train_data <- training(data_split)
+test_data  <- testing(data_split)
+
+print(train_data)
+print(test_data)
+
+#Okay, that worked.  What now?  Fit models to outcome Y for dose and all remaining variables?  And find the RMSE.  Okay. Here goes.
+
+
+#First, DOSE.
+
+lmfitC1 <- lm(Y ~ DOSE, train_data)  
+
+# place results from fit into a data frame with the tidy function
+lmtableC1 <- broom::tidy(lmfitC1)
+
+#look at fit results
+print(lmtableC1)
+
+# save fit results table  
+table_fileC1 = here("fitting-exercise", "fitC1_table.rds")
+saveRDS(lmtableC1, file = table_fileC1)
+
+# Predict the values using the model
+predictions <- predict(lmfitC1, train_data)
+
+# Calculate the residuals (differences between observed and predicted values)
+residuals1 <- train_data$Y - predictions
+
+# Calculate the RMSE
+rmse1 <- sqrt(mean(residuals1^2))
+
+# Print the RMSE
+print(rmse1)
+
+#Then All of them!
+
+lmfitC2 <- lm(Y ~ AGE + DOSE + SEX + WT + HT, train_data) 
+
+
+# place results from fit into a data frame with the tidy function
+lmtableC2 <- broom::tidy(lmfitC2)
+
+#look at fit results
+print(lmtableC2)
+
+# save fit results table  
+table_fileC2 = here("fitting-exercise", "fitC2_table.rds")
+saveRDS(lmtableC2, file = table_fileC2)
+
+# Predict the values using the model
+predictions <- predict(lmfitC2, train_data)
+
+# Calculate the residuals (differences between observed and predicted values)
+residuals2 <- train_data$Y - predictions
+
+# Calculate the RMSE
+rmse2 <- sqrt(mean(residuals2^2))
+
+# Print the RMSE
+print(rmse2)
+
+#Null Data?  I am completely lost here.
+
+
+
+
+linear_reg() %>% set_engine("glm")
+model_trial <- linear_reg()
+
+null_data <- null_model() %>% 
+  set_engine("parsnip") %>% 
+  set_mode("regression") %>% 
+  translate()
+
+null_data %>% parsnip::fit(Y ~ ., data = train_data)
+null_fit <- null_data %>% fit(Y ~ AGE * DOSE * SEX * WT * HT, data = train_data)
+predictions <- predict(null_fit, train_data)
+residuals <- null_data$Y - predictions
+rmse <- sqrt(mean(residuals^2))
+print(rmse)
+
+#It runs without error, but I get no values.  I don't know what I am doing here.  I do not understand the syntax.
+
+
+
+
+
+#Trying it all with a model.
+
+#Trying it this way... with train data.
+linear_reg() %>% set_engine("glm")
+model_trial <- linear_reg()
+fit_trial1 <- model_trial %>% fit(Y ~ AGE * DOSE * SEX * WT * HT, data = train_data)
+
+tidy(fit_trial1)
+
+predictions <- predict(fit_trial1, train_data)
+residuals_mod <- train_data$Y - predictions
+rmse_mod <- sqrt(mean(residuals_mod^2))
+print(rmse_mod)
+
+
+
+
+
+
+
+
+#Okay, now we are going to evaluate our model.
+suppressPackageStartupMessages(library(modeldata))
+suppressPackageStartupMessages(library(recipes))
+
+
+rnseed = 1234
+set.seed(rnseed)
+
+data_split <- initial_split(Combo_Mav2, prop = 0.9)
+
+# Create data frames for the two sets:
+train_data2 <- training(data_split)
+test_data2  <- testing(data_split)
+
+print(train_data2)
+print(test_data2)
+
+data(Combo_Mav2)
+rec_data2 <- recipe(Y ~ ., data = Combo_Mav2)
+
+rec_data2
+
+print(rec_data2)
+
+# Define the linear regression model
+model_trial <- linear_reg() %>% set_engine("glm") %>% translate()
+
+# Define the 10-fold cross-validation plan
+cv <- vfold_cv(train_data2, v = 10, repeats =10, strata = NULL)
+
+#okay, if I use Combo_mav2 then I get an error in the next line:  Must perform recipe.
+#If I use a recipe then I just get a null set.
+
+# Perform cross-validation
+lm_results <- fit_resamples(
+  model_trial,
+  cv,
+  metrics = metric_set(rmse, rsq)
+)
+
+# Summarize the results
+summary(lm_results)
+
+
+
+
+

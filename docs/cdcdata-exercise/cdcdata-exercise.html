@@ -157,6 +157,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Fitting Exercise</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../ml-models-exercise/ml-models-exercise.html">
+ <span class="dropdown-text">ml-models_exercise</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../cdcdata-exercise/cdcdata-exercise.html">
  <span class="dropdown-text">CDC Data Exercise</span></a>
   </li>  
@@ -214,28 +218,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Data can be found at: https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc/about_data</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Call a bunch of libraries.</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(here))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'broom' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(here))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'here' was built under R version 4.3.3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(kableExtra))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readxl' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'skimr' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(kableExtra))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'kableExtra' was built under R version 4.3.3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load excel data file</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Data file from CDC "COVID-19_Vaccinations_in_the_United_States_Jurisdiction_20240208"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>data_location <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"cdcdata-exercise"</span>,<span class="st">"CDC_COVID-19_Vaccinations.xlsx"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>CDC_data <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(data_location)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Take a squinty</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(CDC_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load excel data file</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Data file from CDC "COVID-19_Vaccinations_in_the_United_States_Jurisdiction_20240208"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>data_location <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"cdcdata-exercise"</span>,<span class="st">"CDC_COVID-19_Vaccinations.xlsx"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>CDC_data <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(data_location)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Take a squinty</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(CDC_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 38,488
 Columns: 109
@@ -349,7 +371,7 @@ $ Bivalent_Booster_18Plus_Pop_Pct        &lt;dbl&gt; 21.9, 9.8, 13.2, 14.2, 26.2
 $ Bivalent_Booster_65Plus                &lt;dbl&gt; 151146, 184844, 476297, 34832, …
 $ Bivalent_Booster_65Plus_Pop_Pct        &lt;dbl&gt; 48.4, 24.9, 31.4, 35.1, 55.0, 4…</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(CDC_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(CDC_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Date                          MMWR_week       Location        
  Min.   :2020-12-13 00:00:00.00   Min.   : 1.00   Length:38488      
@@ -704,7 +726,7 @@ $ Bivalent_Booster_65Plus_Pop_Pct        &lt;dbl&gt; 48.4, 24.9, 31.4, 35.1, 55.
  Max.   :23699191        Max.   :71.20                  
  NA's   :36504           NA's   :36504                  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CDC_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CDC_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 109
   Date                MMWR_week Location Distributed Distributed_Janssen
@@ -723,7 +745,7 @@ $ Bivalent_Booster_65Plus_Pop_Pct        &lt;dbl&gt; 48.4, 24.9, 31.4, 35.1, 55.
 #   Administered_5Plus &lt;dbl&gt;, Administered_12Plus &lt;dbl&gt;,
 #   Administered_18Plus &lt;dbl&gt;, Administered_65Plus &lt;dbl&gt;, …</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(CDC_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(CDC_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Data summary</caption>
@@ -2266,20 +2288,20 @@ $ Bivalent_Booster_65Plus_Pop_Pct        &lt;dbl&gt; 48.4, 24.9, 31.4, 35.1, 55.
 </tbody>
 </table>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(CDC_data <span class="sc">$</span>Location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(CDC_data <span class="sc">$</span>Location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Save a rds version</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>save_data_location <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"cdcdata-exercise"</span>,<span class="st">"CDC_data.rds"</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(CDC_data, <span class="at">file =</span> save_data_location)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Location, </span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>CDC_Filter <span class="ot">&lt;-</span> CDC_data <span class="sc">%&gt;%</span> </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Location, Date, Dist_Per_100K, Admin_Per_100K, Distributed_Janssen, Distributed_Moderna, Distributed_Pfizer)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Take another squinty</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(CDC_Filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Save a rds version</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>save_data_location <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"cdcdata-exercise"</span>,<span class="st">"CDC_data.rds"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(CDC_data, <span class="at">file =</span> save_data_location)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Location, </span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>CDC_Filter <span class="ot">&lt;-</span> CDC_data <span class="sc">%&gt;%</span> </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Location, Date, Dist_Per_100K, Admin_Per_100K, Distributed_Janssen, Distributed_Moderna, Distributed_Pfizer)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Take another squinty</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(CDC_Filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 38,488
 Columns: 7
@@ -2291,7 +2313,7 @@ $ Distributed_Janssen &lt;dbl&gt; 152400, 330500, 869100, 49300, 501900, 1569200
 $ Distributed_Moderna &lt;dbl&gt; 1647380, 3807980, 9763000, 490040, 5402640, 139411…
 $ Distributed_Pfizer  &lt;dbl&gt; 2905630, 5164550, 14773655, 585605, 9029715, 21178…</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(CDC_Filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(CDC_Filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Location              Date                        Dist_Per_100K   
  Length:38488       Min.   :2020-12-13 00:00:00.00   Min.   :     0  
@@ -2308,7 +2330,7 @@ $ Distributed_Pfizer  &lt;dbl&gt; 2905630, 5164550, 14773655, 585605, 9029715, 2
  3rd Qu.:153463   3rd Qu.:  457800    3rd Qu.:  3962520   3rd Qu.:  5514269  
  Max.   :302852   Max.   :32496900    Max.   :352247700   Max.   :586424075  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CDC_Filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CDC_Filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 7
   Location Date                Dist_Per_100K Admin_Per_100K Distributed_Janssen
@@ -2321,7 +2343,7 @@ $ Distributed_Pfizer  &lt;dbl&gt; 2905630, 5164550, 14773655, 585605, 9029715, 2
 6 PA       2023-05-10 00:00:00        335071         215486             1569200
 # ℹ 2 more variables: Distributed_Moderna &lt;dbl&gt;, Distributed_Pfizer &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(CDC_Filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(CDC_Filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Data summary</caption>
@@ -2538,11 +2560,11 @@ $ Distributed_Pfizer  &lt;dbl&gt; 2905630, 5164550, 14773655, 585605, 9029715, 2
 </tbody>
 </table>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plot_date_vs_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(CDC_Filter, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>Dist_Per_100K)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Doses Distributed vs. Time"</span>, <span class="at">x=</span><span class="st">"Time (Date)"</span>, <span class="at">y=</span><span class="st">"Doses Distibuted Per 100K"</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plot_date_vs_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>plot_date_vs_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(CDC_Filter, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>Dist_Per_100K)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Doses Distributed vs. Time"</span>, <span class="at">x=</span><span class="st">"Time (Date)"</span>, <span class="at">y=</span><span class="st">"Doses Distibuted Per 100K"</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>plot_date_vs_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2550,9 +2572,9 @@ $ Distributed_Pfizer  &lt;dbl&gt; 2905630, 5164550, 14773655, 585605, 9029715, 2
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plot_date_vs_admin <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(CDC_Filter, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>Admin_Per_100K)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Doses Administered vs. Time"</span>, <span class="at">x=</span><span class="st">"Time (Date)"</span>, <span class="at">y=</span><span class="st">"Doses Administrated Per 100K"</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>plot_date_vs_admin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plot_date_vs_admin <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(CDC_Filter, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>Admin_Per_100K)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Doses Administered vs. Time"</span>, <span class="at">x=</span><span class="st">"Time (Date)"</span>, <span class="at">y=</span><span class="st">"Doses Administrated Per 100K"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>plot_date_vs_admin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2562,16 +2584,16 @@ $ Distributed_Pfizer  &lt;dbl&gt; 2905630, 5164550, 14773655, 585605, 9029715, 2
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filtered to Georgia</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>CDC_SE_Filter <span class="ot">&lt;-</span> CDC_Filter <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Location <span class="sc">==</span> <span class="st">"GA"</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>CDC_SE_Filter <span class="ot">&lt;-</span> CDC_SE_Filter <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Location <span class="sc">==</span> <span class="st">"GA"</span>)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>CDC_SE_Filter <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(CDC_SE_Filter)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>plot_date_vs_dist2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(CDC_SE_Filter, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>Dist_Per_100K)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Doses Distributed vs. Time"</span>, <span class="at">x=</span><span class="st">"Time (Date)"</span>, <span class="at">y=</span><span class="st">"Doses Distibuted Per 100K"</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>plot_date_vs_dist2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filtered to Georgia</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>CDC_SE_Filter <span class="ot">&lt;-</span> CDC_Filter <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Location <span class="sc">==</span> <span class="st">"GA"</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>CDC_SE_Filter <span class="ot">&lt;-</span> CDC_SE_Filter <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Location <span class="sc">==</span> <span class="st">"GA"</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>CDC_SE_Filter <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(CDC_SE_Filter)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>plot_date_vs_dist2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(CDC_SE_Filter, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>Dist_Per_100K)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Doses Distributed vs. Time"</span>, <span class="at">x=</span><span class="st">"Time (Date)"</span>, <span class="at">y=</span><span class="st">"Doses Distibuted Per 100K"</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>plot_date_vs_dist2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2579,9 +2601,9 @@ $ Distributed_Pfizer  &lt;dbl&gt; 2905630, 5164550, 14773655, 585605, 9029715, 2
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>plot_date_vs_admin2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(CDC_SE_Filter, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>Admin_Per_100K)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Doses Administered vs. Time"</span>, <span class="at">x=</span><span class="st">"Time (Date)"</span>, <span class="at">y=</span><span class="st">"Doses Administrated Per 100K"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>plot_date_vs_admin2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plot_date_vs_admin2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(CDC_SE_Filter, <span class="fu">aes</span>(<span class="at">x=</span>Date, <span class="at">y=</span>Admin_Per_100K)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Doses Administered vs. Time"</span>, <span class="at">x=</span><span class="st">"Time (Date)"</span>, <span class="at">y=</span><span class="st">"Doses Administrated Per 100K"</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>plot_date_vs_admin2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2591,12 +2613,12 @@ $ Distributed_Pfizer  &lt;dbl&gt; 2905630, 5164550, 14773655, 585605, 9029715, 2
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>CDC_SE_All <span class="ot">&lt;-</span> CDC_Filter <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Location <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"FL"</span>, <span class="st">"GA"</span>, <span class="st">"VA"</span>, <span class="st">"TN"</span>, <span class="st">"NC"</span>, <span class="st">"SC"</span>, <span class="st">"AL"</span>, <span class="st">"KY"</span>, <span class="st">"MS"</span>))</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>CDC_SE_All <span class="ot">&lt;-</span> CDC_SE_All <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Location <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"FL"</span>, <span class="st">"GA"</span>, <span class="st">"VA"</span>, <span class="st">"TN"</span>, <span class="st">"NC"</span>, <span class="st">"SC"</span>, <span class="st">"AL"</span>, <span class="st">"KY"</span>, <span class="st">"MS"</span>))</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>CDC_SE_All <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(CDC_SE_All)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Take another squinty</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(CDC_SE_All)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>CDC_SE_All <span class="ot">&lt;-</span> CDC_Filter <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Location <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"FL"</span>, <span class="st">"GA"</span>, <span class="st">"VA"</span>, <span class="st">"TN"</span>, <span class="st">"NC"</span>, <span class="st">"SC"</span>, <span class="st">"AL"</span>, <span class="st">"KY"</span>, <span class="st">"MS"</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>CDC_SE_All <span class="ot">&lt;-</span> CDC_SE_All <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Location <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"FL"</span>, <span class="st">"GA"</span>, <span class="st">"VA"</span>, <span class="st">"TN"</span>, <span class="st">"NC"</span>, <span class="st">"SC"</span>, <span class="st">"AL"</span>, <span class="st">"KY"</span>, <span class="st">"MS"</span>))</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>CDC_SE_All <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(CDC_SE_All)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Take another squinty</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(CDC_SE_All)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 5,373
 Columns: 7
@@ -2608,7 +2630,7 @@ $ Distributed_Janssen &lt;dbl&gt; 869100, 466400, 959600, 395600, 235400, 247770
 $ Distributed_Moderna &lt;dbl&gt; 9763000, 5125140, 9753880, 4310000, 2600260, 20028…
 $ Distributed_Pfizer  &lt;dbl&gt; 14773655, 6858095, 15371580, 5909535, 3695395, 319…</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(CDC_SE_All)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(CDC_SE_All)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Location              Date                        Dist_Per_100K   
  Length:5373        Min.   :2020-12-14 00:00:00.00   Min.   :    14  
@@ -2625,7 +2647,7 @@ $ Distributed_Pfizer  &lt;dbl&gt; 14773655, 6858095, 15371580, 5909535, 3695395,
  3rd Qu.:140981   3rd Qu.: 672700     3rd Qu.: 5812100    3rd Qu.: 8511000  
  Max.   :229724   Max.   :2478100     Max.   :22201900    Max.   :36043775  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CDC_SE_All)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CDC_SE_All)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 7
   Location Date                Dist_Per_100K Admin_Per_100K Distributed_Janssen
@@ -2638,7 +2660,7 @@ $ Distributed_Pfizer  &lt;dbl&gt; 14773655, 6858095, 15371580, 5909535, 3695395,
 6 FL       2023-05-10 00:00:00        286467         196796             2477700
 # ℹ 2 more variables: Distributed_Moderna &lt;dbl&gt;, Distributed_Pfizer &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(CDC_SE_All)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(CDC_SE_All)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Data summary</caption>
@@ -2855,12 +2877,12 @@ $ Distributed_Pfizer  &lt;dbl&gt; 14773655, 6858095, 15371580, 5909535, 3695395,
 </tbody>
 </table>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>CDC_plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(CDC_SE_All, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Location</span><span class="st">`</span>, <span class="at">y =</span> Admin_Per_100K)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">color =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Administration of COVID Vaccine by State"</span>, <span class="at">x =</span> <span class="st">"State"</span>, <span class="at">y =</span> <span class="st">"Admin Per 100K Pop"</span>) <span class="sc">+</span>  </span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">guides</span>(<span class="at">x =</span>  <span class="fu">guide_axis</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_minimal</span>() </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>CDC_plot3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>CDC_plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(CDC_SE_All, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Location</span><span class="st">`</span>, <span class="at">y =</span> Admin_Per_100K)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">color =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Administration of COVID Vaccine by State"</span>, <span class="at">x =</span> <span class="st">"State"</span>, <span class="at">y =</span> <span class="st">"Admin Per 100K Pop"</span>) <span class="sc">+</span>  </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">guides</span>(<span class="at">x =</span>  <span class="fu">guide_axis</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_minimal</span>() </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>CDC_plot3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2872,77 +2894,77 @@ $ Distributed_Pfizer  &lt;dbl&gt; 14773655, 6858095, 15371580, 5909535, 3695395,
 <p>Contribution made by Arlyn Santiago</p>
 <p><em>All the code below was generated using AI tools such as ChatGPT and Bard AI…</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics for numerical variables using the CDC_SE_Filter dataset</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>num_summary <span class="ot">&lt;-</span> <span class="fu">lapply</span>(CDC_SE_Filter, <span class="cf">function</span>(x) {</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.numeric</span>(x)) {</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    min_val <span class="ot">&lt;-</span> <span class="fu">min</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    max_val <span class="ot">&lt;-</span> <span class="fu">max</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Min"</span> <span class="ot">=</span> min_val, <span class="st">"Max"</span> <span class="ot">=</span> max_val)</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Frequency table for categorical variables</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>cat_frequency <span class="ot">&lt;-</span> <span class="fu">lapply</span>(CDC_SE_Filter, <span class="cf">function</span>(x) {</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.factor</span>(x) <span class="sc">|</span> <span class="fu">is.character</span>(x)) {</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">table</span>(x) <span class="sc">/</span> <span class="fu">length</span>(x)</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="co">#nrows &lt;- nrow(data) # Number of rows to generate</span></span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the synthetic data generation function to accommodate both numerical summaries and categorical frequencies</span></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>generate_synthetic_data <span class="ot">&lt;-</span> <span class="cf">function</span>(num_summary, cat_frequency, nrows) {</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>  synthetic_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="fu">length</span>(num_summary) <span class="sc">+</span> <span class="fu">length</span>(cat_frequency), <span class="at">nrow =</span> nrows))</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add numerical data</span></span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (var_name <span class="cf">in</span> <span class="fu">names</span>(num_summary)) {</span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(num_summary[[var_name]])) {</span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>      synthetic_data[[var_name]] <span class="ot">&lt;-</span> <span class="fu">runif</span>(nrows, <span class="at">min =</span> num_summary[[var_name]][<span class="st">"Min"</span>], <span class="at">max =</span> num_summary[[var_name]][<span class="st">"Max"</span>])</span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add categorical data</span></span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (var_name <span class="cf">in</span> <span class="fu">names</span>(cat_frequency)) {</span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(cat_frequency[[var_name]])) {</span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>      categories <span class="ot">&lt;-</span> <span class="fu">names</span>(cat_frequency[[var_name]])</span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>      frequencies <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(cat_frequency[[var_name]])</span>
-<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>      synthetic_data[[var_name]] <span class="ot">&lt;-</span> <span class="fu">sample</span>(categories, nrows, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> frequencies)</span>
-<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(synthetic_data)</span>
-<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the number of rows for the synthetic dataset</span></span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a><span class="co">#nrows &lt;- nrow(original_data)</span></span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>generate_synthetic_data <span class="ot">&lt;-</span> <span class="cf">function</span>(num_summary, cat_frequency, nrows) {</span>
-<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
-<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Initialize an empty list to store synthetic data columns</span></span>
-<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>  synthetic_data_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate synthetic numerical variables</span></span>
-<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(var_name <span class="cf">in</span> <span class="fu">names</span>(num_summary)) {</span>
-<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(num_summary[[var_name]])) {</span>
-<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>      min_val <span class="ot">&lt;-</span> num_summary[[var_name]][<span class="st">"Min"</span>]</span>
-<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>      max_val <span class="ot">&lt;-</span> num_summary[[var_name]][<span class="st">"Max"</span>]</span>
-<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>      synthetic_data_list[[var_name]] <span class="ot">&lt;-</span> <span class="fu">runif</span>(nrows, <span class="at">min =</span> min_val, <span class="at">max =</span> max_val)</span>
-<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate synthetic categorical variables</span></span>
-<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(var_name <span class="cf">in</span> <span class="fu">names</span>(cat_frequency)) {</span>
-<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(cat_frequency[[var_name]])) {</span>
-<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a>      categories <span class="ot">&lt;-</span> <span class="fu">names</span>(cat_frequency[[var_name]])</span>
-<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a>      frequencies <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(cat_frequency[[var_name]])</span>
-<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a>      synthetic_data_list[[var_name]] <span class="ot">&lt;-</span> <span class="fu">sample</span>(categories, nrows, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> frequencies)</span>
-<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert the list to a data frame</span></span>
-<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a>  synthetic_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(synthetic_data_list)</span>
-<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(synthetic_data)</span>
-<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics for numerical variables using the CDC_SE_Filter dataset</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>num_summary <span class="ot">&lt;-</span> <span class="fu">lapply</span>(CDC_SE_Filter, <span class="cf">function</span>(x) {</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.numeric</span>(x)) {</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    min_val <span class="ot">&lt;-</span> <span class="fu">min</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    max_val <span class="ot">&lt;-</span> <span class="fu">max</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Min"</span> <span class="ot">=</span> min_val, <span class="st">"Max"</span> <span class="ot">=</span> max_val)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Frequency table for categorical variables</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>cat_frequency <span class="ot">&lt;-</span> <span class="fu">lapply</span>(CDC_SE_Filter, <span class="cf">function</span>(x) {</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.factor</span>(x) <span class="sc">|</span> <span class="fu">is.character</span>(x)) {</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">table</span>(x) <span class="sc">/</span> <span class="fu">length</span>(x)</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="co">#nrows &lt;- nrow(data) # Number of rows to generate</span></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the synthetic data generation function to accommodate both numerical summaries and categorical frequencies</span></span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>generate_synthetic_data <span class="ot">&lt;-</span> <span class="cf">function</span>(num_summary, cat_frequency, nrows) {</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>  synthetic_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="fu">length</span>(num_summary) <span class="sc">+</span> <span class="fu">length</span>(cat_frequency), <span class="at">nrow =</span> nrows))</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add numerical data</span></span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (var_name <span class="cf">in</span> <span class="fu">names</span>(num_summary)) {</span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(num_summary[[var_name]])) {</span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>      synthetic_data[[var_name]] <span class="ot">&lt;-</span> <span class="fu">runif</span>(nrows, <span class="at">min =</span> num_summary[[var_name]][<span class="st">"Min"</span>], <span class="at">max =</span> num_summary[[var_name]][<span class="st">"Max"</span>])</span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add categorical data</span></span>
+<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (var_name <span class="cf">in</span> <span class="fu">names</span>(cat_frequency)) {</span>
+<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(cat_frequency[[var_name]])) {</span>
+<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a>      categories <span class="ot">&lt;-</span> <span class="fu">names</span>(cat_frequency[[var_name]])</span>
+<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a>      frequencies <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(cat_frequency[[var_name]])</span>
+<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a>      synthetic_data[[var_name]] <span class="ot">&lt;-</span> <span class="fu">sample</span>(categories, nrows, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> frequencies)</span>
+<span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-37"><a href="#cb43-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(synthetic_data)</span>
+<span id="cb43-38"><a href="#cb43-38" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb43-39"><a href="#cb43-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-40"><a href="#cb43-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the number of rows for the synthetic dataset</span></span>
+<span id="cb43-41"><a href="#cb43-41" aria-hidden="true" tabindex="-1"></a><span class="co">#nrows &lt;- nrow(original_data)</span></span>
+<span id="cb43-42"><a href="#cb43-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-43"><a href="#cb43-43" aria-hidden="true" tabindex="-1"></a>generate_synthetic_data <span class="ot">&lt;-</span> <span class="cf">function</span>(num_summary, cat_frequency, nrows) {</span>
+<span id="cb43-44"><a href="#cb43-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
+<span id="cb43-45"><a href="#cb43-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-46"><a href="#cb43-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Initialize an empty list to store synthetic data columns</span></span>
+<span id="cb43-47"><a href="#cb43-47" aria-hidden="true" tabindex="-1"></a>  synthetic_data_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb43-48"><a href="#cb43-48" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-49"><a href="#cb43-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate synthetic numerical variables</span></span>
+<span id="cb43-50"><a href="#cb43-50" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(var_name <span class="cf">in</span> <span class="fu">names</span>(num_summary)) {</span>
+<span id="cb43-51"><a href="#cb43-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(num_summary[[var_name]])) {</span>
+<span id="cb43-52"><a href="#cb43-52" aria-hidden="true" tabindex="-1"></a>      min_val <span class="ot">&lt;-</span> num_summary[[var_name]][<span class="st">"Min"</span>]</span>
+<span id="cb43-53"><a href="#cb43-53" aria-hidden="true" tabindex="-1"></a>      max_val <span class="ot">&lt;-</span> num_summary[[var_name]][<span class="st">"Max"</span>]</span>
+<span id="cb43-54"><a href="#cb43-54" aria-hidden="true" tabindex="-1"></a>      synthetic_data_list[[var_name]] <span class="ot">&lt;-</span> <span class="fu">runif</span>(nrows, <span class="at">min =</span> min_val, <span class="at">max =</span> max_val)</span>
+<span id="cb43-55"><a href="#cb43-55" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb43-56"><a href="#cb43-56" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb43-57"><a href="#cb43-57" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-58"><a href="#cb43-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate synthetic categorical variables</span></span>
+<span id="cb43-59"><a href="#cb43-59" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(var_name <span class="cf">in</span> <span class="fu">names</span>(cat_frequency)) {</span>
+<span id="cb43-60"><a href="#cb43-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(cat_frequency[[var_name]])) {</span>
+<span id="cb43-61"><a href="#cb43-61" aria-hidden="true" tabindex="-1"></a>      categories <span class="ot">&lt;-</span> <span class="fu">names</span>(cat_frequency[[var_name]])</span>
+<span id="cb43-62"><a href="#cb43-62" aria-hidden="true" tabindex="-1"></a>      frequencies <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(cat_frequency[[var_name]])</span>
+<span id="cb43-63"><a href="#cb43-63" aria-hidden="true" tabindex="-1"></a>      synthetic_data_list[[var_name]] <span class="ot">&lt;-</span> <span class="fu">sample</span>(categories, nrows, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> frequencies)</span>
+<span id="cb43-64"><a href="#cb43-64" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb43-65"><a href="#cb43-65" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb43-66"><a href="#cb43-66" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-67"><a href="#cb43-67" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert the list to a data frame</span></span>
+<span id="cb43-68"><a href="#cb43-68" aria-hidden="true" tabindex="-1"></a>  synthetic_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(synthetic_data_list)</span>
+<span id="cb43-69"><a href="#cb43-69" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-70"><a href="#cb43-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(synthetic_data)</span>
+<span id="cb43-71"><a href="#cb43-71" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
