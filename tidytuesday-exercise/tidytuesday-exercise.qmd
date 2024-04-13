@@ -1,5 +1,100 @@
 ---
 title: "Tidy Tuesday Exercise"
+author: Clarke Miller
+date: "`r Sys.Date()`"
 ---
 
-Placeholder file for the future Tidy Tuesday exercise.
+##Introduction:
+
+The Github Tidy Tuesday data for the week (2024-04-09) is data from the total solar eclipse on 8 April 2024 and from the annular solar eclipse on 14 October 2023. Each data set includes 10 columns of data. The data includes state name, city name, the latitude and longitude of each location, plus the times that the eclipse reached first contact, 50% coverage, time of totality/annularity beginning and ending, time at 2nd 50% coverage, and time of last contact. (See data summaries below.)
+
+```{r, echo=FALSE, message=FALSE}
+
+# load a few R packages
+suppressPackageStartupMessages(library(here))
+suppressPackageStartupMessages(library(knitr))
+
+#| label: tbl-Total_2024_Tab
+#| tbl-cap: "Table 1: Glimpse Table of Total Eclipse 2024 Data."
+#| echo: FALSE
+resulttable=readRDS("../tidytuesday-exercise/Total_2024_Tab.rds")
+knitr::kable(resulttable)
+
+```
+
+***Table 1:*** *Glimpse Table of Total Eclipse 2024 Data.*
+
+```{r, echo=FALSE, message=FALSE}
+
+#| label: tbl-Annular_2023_Tab
+#| tbl-cap: "Table 2: Glimpse Table of Annular Eclipse 2023 Data."
+#| echo: FALSE
+resulttable=readRDS("../tidytuesday-exercise/Annular_2023_Tab.rds")
+knitr::kable(resulttable)
+
+```
+
+***Table 2:*** *Glimpse Table of Annular Eclipse 2023 Data.*
+
+The question posed by the Tidy Tuesday Github administrator is to determine which cities where in the path of both eclipses. This is most easily demonstrated by creating maps of the events. First, we probably want to explore the data by creating a map of the combined longitude and latitude data.
+
+```{r, echo=FALSE, message=FALSE}
+
+#| label: fig-schematic
+#| fig-cap: "Figure 1: Path of the 2023 Annular Solar Eclipse and the 2024 Total Eclipse Overlay."
+#| echo: FALSE
+knitr::include_graphics(here("tidytuesday-exercise","CombEclipseMap.png"))
+
+```
+
+***Figure 1:*** *Path of the 2023 Annular Solar Eclipse and the 2024 Total Eclipse Overlay.*
+
+With a glance it is obvious that the two eclipses did overlap. Finding the combined cities that were in the path of totality in 2024 and the path of annularity in 2023 is a simple matter of finding the common set between the two. Never the less, it is a good idea to test this assumption.
+
+```{r, echo=FALSE, message=FALSE}
+
+#| label: tbl-common_cities
+#| tbl-cap: "Table 3: Cities that Experienced Both the 2023 Annular Eclipse and the 2024 Total Eclipse."
+#| echo: FALSE
+resulttable=readRDS("../tidytuesday-exercise/common_cities.rds")
+knitr::kable(resulttable)
+
+
+```
+
+***Table 3:*** *Cities from the combined data set that were in the path of totality in 2024 and the path of annularity in 2023.*
+
+As seen in **Table 3** (above) there were 146 cities in the data set that shared both totality and annularity in the time frame encompassed by the data.
+
+A second question posed by the Tidy Tuesday Github administrator is to determine which place had the longest period of totality from the data set provided. Common sense and a basic knowledge of orbital mechanics tells us that, intuitively, the longest time of totality will occur at the point closest to the equator. Never the less, it is a good idea to test this assumption. The data set provides two variables, eclipse_3 and eclipse_4, that record the start and stop time for totality. Simply subtracting the two will provide the answer to the second question.
+
+```{r, echo=FALSE, message=FALSE}
+
+
+#| label: tbl-selected_data
+#| tbl-cap: "Table 4: City Calculated to Have Experienced the Longest Duration of Totality During the 2024 Total Eclipse."
+#| echo: FALSE
+resulttable=readRDS("../tidytuesday-exercise/selected_data.rds")
+knitr::kable(resulttable)
+
+```
+
+***Table 4:*** *City Calculated to Have Experienced the Longest Duration of Totality During the 2024 Total Eclipse.*
+
+As expected, the location of greatest length of totality, San Ildefonso Pueblo, New Mexico corresponds to the site that is roughly furthest south and west in the data set. Common wisdom 
+
+```{r, echo=FALSE, message=FALSE}
+
+# R doesn't want to deal with time data as a number tonight, so I'm going to try this again in the morning.
+
+
+```
+
+```{r}
+
+
+```
+
+```{r}
+
+```
