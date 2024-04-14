@@ -1,7 +1,6 @@
 ---
 title: "Tidy Tuesday Exercise"
 author: Clarke Miller
-date: "`r Sys.Date()`"
 ---
 
 ##Introduction:
@@ -13,12 +12,21 @@ The Github Tidy Tuesday data for the week (2024-04-09) is data from the total so
 # load a few R packages
 suppressPackageStartupMessages(library(here))
 suppressPackageStartupMessages(library(knitr))
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(dplyr)) 
 
-#| label: tbl-Total_2024_Tab
-#| tbl-cap: "Table 1: Glimpse Table of Total Eclipse 2024 Data."
-#| echo: FALSE
-resulttable=readRDS("../tidytuesday-exercise/Total_2024_Tab.rds")
-knitr::kable(resulttable)
+
+#Load data.
+data_location <- here::here("tidytuesday-exercise", "eclipse_total_2024.csv")
+Total_2024 <- read.csv(data_location)
+
+data_location <- here::here("tidytuesday-exercise", "eclipse_annular_2023.csv")
+Annular_2023 <- read.csv(data_location)
+
+#Explore Data
+Total_2024_Tab <- glimpse(Total_2024)
+
+
 
 ```
 
@@ -26,11 +34,8 @@ knitr::kable(resulttable)
 
 ```{r, echo=FALSE, message=FALSE}
 
-#| label: tbl-Annular_2023_Tab
-#| tbl-cap: "Table 2: Glimpse Table of Annular Eclipse 2023 Data."
-#| echo: FALSE
-resulttable=readRDS("../tidytuesday-exercise/Annular_2023_Tab.rds")
-knitr::kable(resulttable)
+#Explore data
+Annular_2023_Tab <- glimpse(Annular_2023)
 
 ```
 
@@ -53,11 +58,19 @@ With a glance it is obvious that the two eclipses did overlap. Finding the combi
 
 ```{r, echo=FALSE, message=FALSE}
 
-#| label: tbl-common_cities
-#| tbl-cap: "Table 3: Cities that Experienced Both the 2023 Annular Eclipse and the 2024 Total Eclipse."
-#| echo: FALSE
-resulttable=readRDS("../tidytuesday-exercise/common_cities.rds")
-knitr::kable(resulttable)
+#Find the common cities.
+
+cities1 <- Total_2024 %>% select(name)
+cities2 <- Annular_2023 %>% select(name)
+
+# Find the common cities using intersect()
+common_cities <- intersect(cities1, cities2)
+
+# Print the common cities
+print(common_cities)
+
+save_data_location <- here::here("tidytuesday-exercise","common_cities.rds")
+saveRDS(common_cities, file = save_data_location)
 
 
 ```
@@ -81,20 +94,46 @@ knitr::kable(resulttable)
 
 ***Table 4:*** *City Calculated to Have Experienced the Longest Duration of Totality During the 2024 Total Eclipse.*
 
-As expected, the location of greatest length of totality, San Ildefonso Pueblo, New Mexico corresponds to the site that is roughly furthest south and west in the data set. Common wisdom 
+As expected, the location of greatest length of totality, San Ildefonso Pueblo, New Mexico corresponds to the site that is roughly furthest south and west in the data set. 
+
+As stated above, common sense and a basic knowledge of orbital mechanics tells us that, intuitively, the longest time of totality will occur at the point closest to the equator.  To test this assumption we can model the dependence of the length of time in totality for a location based on the latitude and longitude of the location.  It is important to realize that while we would not normally expect there to be a correlation between longitude and the length of the eclipse, some correlation may exist because of the Earth's rotation. i.e. The totality shadow moved in longitude and latitude at the same time.   
 
 ```{r, echo=FALSE, message=FALSE}
 
-# R doesn't want to deal with time data as a number tonight, so I'm going to try this again in the morning.
+#| label: tbl-selected_data
+#| tbl-cap: "Table 5: Results of Linear Regression: Total Eclipse Time vs. Longitude."
+#| echo: FALSE
+resulttable=readRDS("../tidytuesday-exercise/lmtable1.rds")
+knitr::kable(resulttable)
 
 
 ```
+
+**Table 5:** *Results of Linear Regression: Total Eclipse Time vs. Longitude.*
+
 
 ```{r}
 
+#| label: tbl-selected_data
+#| tbl-cap: "Table 6: Results of Linear Regression: Total Eclipse Time vs. Latitude."
+#| echo: FALSE
+resulttable=readRDS("../tidytuesday-exercise/lmtable2.rds")
+knitr::kable(resulttable)
 
 ```
+
+**Table 6:** *Results of Linear Regression: Total Eclipse Time vs. Latitude.*
+
 
 ```{r}
 
+#| label: tbl-selected_data
+#| tbl-cap: "Table 7: Results of Linear Regression: Total Eclipse Time vs. Longitude and Latitude."
+#| echo: FALSE
+resulttable=readRDS("../tidytuesday-exercise/lmtable3.rds")
+knitr::kable(resulttable)
+
 ```
+
+**Table 7:** *Results of Linear Regression: Total Eclipse Time vs. Longitude and Latitude.*
+

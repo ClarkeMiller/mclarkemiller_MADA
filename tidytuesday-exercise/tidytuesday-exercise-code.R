@@ -91,8 +91,16 @@ cities2 <- Annular_2023 %>% select(name)
 # Find the common cities using intersect()
 common_cities <- intersect(cities1, cities2)
 
+common_cities$group <- rep(1:ceiling(nrow(resulttable)/10), each = 10, length.out = nrow(resulttable))
+
+# Spread the cities across 10 columns based on the grouping
+spread_table <- spread(resulttable, key = group, value = cities)
+
+# Print the spread table
+knitr::kable(spread_table)
+
 save_data_location <- here::here("tidytuesday-exercise","common_cities.rds")
-saveRDS(common_cities, file = save_data_location)
+saveRDS(spread_table, file = save_data_location)
 
 
 #Find the city with the longest total eclipse time.
@@ -125,16 +133,62 @@ saveRDS(selected_data, file = save_data_location)
 #Here I am setting up models to test the dependence of longitude, latitude, or both
 #on the length of totality.
 
+library(lubridate)
 
 
-longest_difference1 <- Total_2024B %>%
-  mutate(time_difference = eclipse_4 - eclipse_3)
 
+#Load data.
+data_location <- here::here("tidytuesday-exercise", "eclipse_total_2024.csv")
+Total_2024 <- read.csv(data_location)
+
+Total_2024B <- Total_2024
+
+Total_2024B <- Total_2024B %>%
+  mutate(eclipse_3 = hms(eclipse_3),
+         eclipse_4 = hms(eclipse_4))
+
+Total_2024B <- Total_2024B %>%
+  mutate(ecl_num = eclipse_4 - eclipse_3)
+
+Total_2024B$ecl_num <- as.numeric(Total_2024B$ecl_num)
 
 lin_mod <- linear_reg() %>% set_engine("lm")
-linfit1 <- lin_mod %>% fit(time_difference ~ lon, data = longest_difference1)
-linfit2 <- lin_mod %>% fit(time_difference ~ lat, data = longest_difference1)
-linfit3 <- lin_mod %>% fit(time_difference ~ lon + lat, data = longest_difference1)
+linfit1 <- lin_mod %>% fit(ecl_num ~ lon, data = Total_2024B)
+linfit2 <- lin_mod %>% fit(ecl_num ~ lat, data = Total_2024B)
+linfit3 <- lin_mod %>% fit(ecl_num ~ lon + lat, data = Total_2024B)
+
+
+# Print the results
+lmtable1 <- tidy(linfit1)
+table_file1 <- here("tidytuesday-exercise","lmtable1.rds")
+saveRDS(lmtable1, file = table_file1)
+
+# Print the results
+lmtable2 <- tidy(linfit2)
+table_file2 <- here("tidytuesday-exercise","lmtable2.rds")
+saveRDS(lmtable2, file = table_file2)
+
+# Print the results
+lmtable3 <- tidy(linfit3)
+table_file3 <- here("tidytuesday-exercise","lmtable3.rds")
+saveRDS(lmtable3, file = table_file3)
+
+
+
+#OLD
+
+fit1 <- broom::tidy(linfit1)
+save_data_location <- here::here("tidytuesday-exercise","fit1.rds")
+saveRDS(fit1, file = save_data_location)
+
+fit2 <- broom::tidy(linfit1)
+save_data_location <- here::here("tidytuesday-exercise","linfit2.rds")
+saveRDS(linfit2, file = save_data_location)
+
+fit3 <- broom::tidy(linfit1)
+save_data_location <- here::here("tidytuesday-exercise","linfit3.rds")
+saveRDS(linfit3, file = save_data_location)
+
 
 
 library(broom)
@@ -142,7 +196,7 @@ library(knitr)
 library(kableExtra)
 
 # Print the results
-lmtable1 <- print(linfit1)
+lmtable1 <- tidy(linfit1)
 table_file1 <- here("tidytuesday-exercise","lmtable1.rds")
 saveRDS(lmtable1, file = table_file1)
 
@@ -160,7 +214,7 @@ tidy_result <- data.frame(
 )
 
 # Create a styled table using kableExtra
-styled_table <- kable(tidy_result, caption = "Linear model fit table.") %>%
+styled_table <- kable(tidy_result, caption = "Linear Model Fit Table.") %>%
   kable_styling(full_width = FALSE)  # Adjust styling options as needed
 
 # Save the styled table as a figure

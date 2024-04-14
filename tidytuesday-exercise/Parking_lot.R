@@ -57,5 +57,21 @@ linfit3 <- lin_mod %>% fit(time_numeric ~ lon + lat, data = longest_difference1)
 print(linfit1)
 
 
+#| label: tbl-Total_2024_Tab
+#| tbl-cap: "Table 1: Glimpse Table of Total Eclipse 2024 Data."
+#| echo: FALSE
+resulttable=readRDS("../tidytuesday-exercise/Total_2024_Tab.rds")
+knitr::kable(resulttable)
 
+#| label: tbl-Annular_2023_Tab
+#| tbl-cap: "Table 2: Glimpse Table of Annular Eclipse 2023 Data."
+#| echo: FALSE
+resulttable=readRDS("../tidytuesday-exercise/Annular_2023_Tab.rds")
+knitr::kable(resulttable)
+
+#| label: tbl-common_cities
+#| tbl-cap: "Table 3: Cities that Experienced Both the 2023 Annular Eclipse and the 2024 Total Eclipse."
+#| echo: FALSE
+resulttable=readRDS("../tidytuesday-exercise/common_cities.rds")
+knitr::kable(resulttable)
 
